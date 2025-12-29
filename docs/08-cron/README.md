@@ -948,3 +948,10 @@ crontab -l
 ---
 
 > 💡 **Pro Tip:** "Selalu test script secara manual sebelum schedule dengan cron. Gunakan absolute path untuk semua commands dan files. Dan jangan lupa redirect output ke log file!"
+
+---
+
+**Sebelumnya:** [Modul 07: SSH (Secure Shell) untuk Data Engineering](../07-ssh/README.md)  
+**Selanjutnya:** [Modul 09: Text Processing untuk Data Engineering](../09-text-processing/README.md)
+
+---

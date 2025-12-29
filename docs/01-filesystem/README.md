@@ -540,6 +540,11 @@ sequenceDiagram
 | Gunakan absolute path di script | Relative path di cron |
 | Cek dengan \`ls\` sebelum \`rm\` | Hapus langsung |
 
----
 
 > 💡 **Pro Tip:** "Selalu gunakan \`ls\` atau \`tree\` untuk memverifikasi hasil operasi filesystem sebelum melanjutkan ke langkah berikutnya!"
+
+---
+
+**Selanjutnya:** [Modul 02: Permission](../02-permission/README.md)
+
+---

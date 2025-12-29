@@ -854,3 +854,10 @@ ssh server 'cd /app && ./script.sh'
 ---
 
 > 💡 **Pro Tip:** "Setup SSH config dan gunakan alias. Ini membuat automation dan daily work jauh lebih efisien. Kombinasikan dengan SSH agent untuk pengalaman tanpa password yang aman!"
+
+---
+
+**Sebelumnya:** [Modul 06: Networking Linux untuk Data Engineering](../06-networking/README.md)  
+**Selanjutnya:** [Modul 08: Cron & Task Scheduling untuk Data Engineering](../08-cron/README.md)
+
+---

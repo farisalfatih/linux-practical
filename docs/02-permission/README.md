@@ -537,3 +537,10 @@ sequenceDiagram
 ---
 
 > 💡 **Pro Tip:** "Principle of Least Privilege - berikan permission seminimal mungkin yang diperlukan untuk menjalankan tugas!"
+
+---
+
+**Sebelumnya:** [Modul 01: Filesystem & Path Linux untuk Data Engineering](../01-filesystem/README.md)  
+**Selanjutnya:** [Modul 03: Environment Variable Linux untuk Data Engineering](../03-env-variable/README.md)
+
+---

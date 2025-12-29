@@ -666,3 +666,10 @@ echo ".secrets" >> .gitignore
 ---
 
 > 💡 **Pro Tip:** "Store configuration in the environment - Twelve-Factor App methodology. Ini memudahkan deployment ke berbagai environment tanpa mengubah code!"
+
+---
+
+**Sebelumnya:** [Modul 02: Permission & Ownership Linux untuk Data Engineering](../02-permission/README.md)  
+**Selanjutnya:** [Modul 04: Process Management Linux untuk Data Engineering](../04-prosess/README.md)
+
+---

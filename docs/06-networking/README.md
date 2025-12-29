@@ -722,3 +722,10 @@ sequenceDiagram
 ---
 
 > 💡 **Pro Tip:** "Selalu test connectivity dalam script ETL dengan timeout yang wajar. Gunakan health check endpoints sebelum menjalankan operasi data yang besar!"
+
+---
+
+**Sebelumnya:** [Modul 05: Archive & Transfer Linux untuk Data Engineering](../05-archive-transfer/README.md)  
+**Selanjutnya:** [Modul 07: SSH (Secure Shell) untuk Data Engineering](../07-ssh/README.md)
+
+---

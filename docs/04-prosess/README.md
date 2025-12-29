@@ -721,3 +721,10 @@ ps -p $(cat job.pid)
 ---
 
 > 💡 **Pro Tip:** "Selalu gunakan nohup dan redirect output untuk long-running ETL jobs. Kombinasikan dengan PID file untuk management yang lebih baik!"
+
+---
+
+**Sebelumnya:** [Modul 03: Environment Variable Linux untuk Data Engineering](../03-env-variable/README.md)  
+**Selanjutnya:** [Modul 05: Archive & Transfer Linux untuk Data Engineering](../05-archive-transfer/README.md)
+
+---

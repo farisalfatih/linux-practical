@@ -702,3 +702,10 @@ tar -tzf archive.tar.gz > /dev/null && echo "OK"
 ---
 
 > 💡 **Pro Tip:** "Selalu verifikasi backup dengan melakukan test restore. Backup yang tidak bisa di-restore adalah backup yang tidak berguna!"
+
+---
+
+**Sebelumnya:** [Modul 04: Process Management Linux untuk Data Engineering](../04-prosess/README.md)  
+**Selanjutnya:** [Modul 06: Networking Linux untuk Data Engineering](../06-networking/README.md)
+
+---
