@@ -12,14 +12,16 @@ Panduan praktis Linux untuk Data Engineer. Repository ini berisi materi pembelaj
 
 | No | Modul | Topik | Skill Level |
 |----|-------|-------|-------------|
-| 01 | [Filesystem](docs/%2001-filesystem/README.MD) | Navigasi, struktur direktori, operasi file | ⭐ Beginner |
-| 02 | [Permission](docs/%2002-permission/README.md) | Hak akses, chmod, chown, ACL | ⭐ Beginner |
-| 03 | [Environment Variable](docs/%2003-env-variable/README.md) | PATH, .env, export, source | ⭐⭐ Intermediate |
-| 04 | [Process](docs/%2004-prosess/README.md) | ps, top, kill, background jobs | ⭐⭐ Intermediate |
-| 05 | [Archive & Transfer](docs/%2005-archive-transfer/README.md) | tar, gzip, scp, rsync, curl | ⭐⭐ Intermediate |
-| 06 | [Networking](docs/%2006-networking/README.md) | ping, netstat, DNS, HTTP testing | ⭐⭐ Intermediate |
-| 07 | [SSH](docs/%2007-ssh/README.md) | Keys, config, tunneling, jump hosts | ⭐⭐⭐ Advanced |
-| 08 | [Cron](docs/%2008-cron/README.md) | Scheduling, crontab, systemd timers | ⭐⭐⭐ Advanced |
+| 01 | [Filesystem](docs/01-filesystem/README.md) | Navigasi, struktur direktori, operasi file | ⭐ Beginner |
+| 02 | [Permission](docs/02-permission/README.md) | Hak akses, chmod, chown, ACL | ⭐ Beginner |
+| 03 | [Environment Variable](docs/03-env-variable/README.md) | PATH, .env, export, source | ⭐⭐ Intermediate |
+| 04 | [Process](docs/04-prosess/README.md) | ps, top, kill, background jobs | ⭐⭐ Intermediate |
+| 05 | [Archive & Transfer](docs/05-archive-transfer/README.md) | tar, gzip, scp, rsync, curl | ⭐⭐ Intermediate |
+| 06 | [Networking](docs/06-networking/README.md) | ping, netstat, DNS, HTTP testing | ⭐⭐ Intermediate |
+| 07 | [SSH](docs/07-ssh/README.md) | Keys, config, tunneling, jump hosts | ⭐⭐⭐ Advanced |
+| 08 | [Cron](docs/08-cron/README.md) | Scheduling, crontab, systemd timers | ⭐⭐⭐ Advanced |
+| 09 | [Text Processing](docs/09-text-processing/README.md) | grep, awk, sed, cut, sort, uniq | ⭐⭐⭐ Advanced |
+| 10 | [Shell Scripting](docs/10-shell-scripting/README.md) | Variables, loops, functions, scripts | ⭐⭐⭐ Advanced |
 
 ---
 
@@ -35,6 +37,8 @@ Setelah menyelesaikan seluruh modul, peserta mampu:
 - ✅ **Network Troubleshooting** - Mendiagnosis masalah jaringan
 - ✅ **Remote Access** - Mengakses server secara aman dengan SSH
 - ✅ **Task Scheduling** - Mengotomatisasi ETL jobs dengan cron
+- ✅ **Text Processing** - Parsing dan transformasi data dengan grep, awk, sed
+- ✅ **Shell Scripting** - Automasi dengan bash scripts
 
 ---
 
@@ -52,7 +56,9 @@ linux-practical/
 │   ├── 05-archive-transfer/ # Modul archive & transfer
 │   ├── 06-networking/  # Modul networking
 │   ├── 07-ssh/         # Modul SSH
-│   └── 08-cron/        # Modul cron & scheduling
+│   ├── 08-cron/        # Modul cron & scheduling
+│   ├── 09-text-processing/  # Modul text processing
+│   └── 10-shell-scripting/  # Modul shell scripting
 └── lab/                # Hands-on lab exercises
     ├── 01-filesystem/
     ├── 02-permission/
