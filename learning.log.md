@@ -564,3 +564,168 @@ archive/
 
 8 directories, 14 files
 ```
+### Mini challenge 1: Organisasi data 2025-12-30 14:01:51
+```text
+/home/faris-al-fatih/linux-practical/lab/01-challenge-organisasi-data
+.
+├── archive
+├── logs
+├── production
+├── raw
+└── staging
+
+6 directories, 0 files
+.
+├── archive
+├── logs
+├── production
+├── raw
+│   ├── data_1.csv
+│   ├── data_2.csv
+│   ├── data_3.csv
+│   ├── data_4.csv
+│   └── data_5.csv
+└── staging
+
+6 directories, 5 files
+'raw/data_1.csv' -> 'staging/data_1.csv'
+'raw/data_2.csv' -> 'staging/data_2.csv'
+'raw/data_3.csv' -> 'staging/data_3.csv'
+'raw/data_4.csv' -> 'staging/data_4.csv'
+'raw/data_5.csv' -> 'staging/data_5.csv'
+.
+├── archive
+├── logs
+├── production
+├── raw
+│   ├── data_1.csv
+│   ├── data_2.csv
+│   ├── data_3.csv
+│   ├── data_4.csv
+│   └── data_5.csv
+└── staging
+    ├── data_1.csv
+    ├── data_2.csv
+    ├── data_3.csv
+    ├── data_4.csv
+    └── data_5.csv
+
+6 directories, 10 files
+```
+### Mini Challange 2: ETL Simulation 2025-12-30 14:21:41
+```text
+renamed '01-challenge-organisasi-data/' -> '01-challange'
+mkdir: created directory 'archive/backup_2025-12-30_14-26-17'
+'archive/latest' -> 'archive/backup_2025-12-30_14-26-17/*'
+Tue Dec 30 14:31:04 WIB 2025: Files Archived
+.
+├── archive
+│   ├── backup_2025-12-30_14-26-17
+│   └── latest -> archive/backup_2025-12-30_14-26-17/*
+├── logs
+│   └── etl_log.txt
+├── production
+├── raw
+│   ├── data_1.csv
+│   ├── data_2.csv
+│   ├── data_3.csv
+│   ├── data_4.csv
+│   └── data_5.csv
+└── staging
+    ├── data_1.csv
+    ├── data_2.csv
+    ├── data_3.csv
+    ├── data_4.csv
+    └── data_5.csv
+
+7 directories, 12 files
+```
+### Mini Challange 3: Cleanup Scripts 2025-12-30 14:35:01
+```text
+.
+├── archive
+│   ├── backup_2025-12-30_14-26-17
+│   └── latest -> archive/backup_2025-12-30_14-26-17/*
+├── logs
+│   └── etl_log.txt
+├── production
+├── raw
+│   ├── data_1.csv
+│   ├── data_2.csv
+│   ├── data_3.csv
+│   ├── data_4.csv
+│   └── data_5.csv
+└── staging
+    ├── data_1.csv
+    ├── data_2.csv
+    ├── data_3.csv
+    ├── data_4.csv
+    └── data_5.csv
+
+7 directories, 12 files
+mkdir: created directory 'tmp'
+-rw-r--r-- 1 faris-al-fatih faris-al-fatih 0 Jun  6  2024 tmp/file-chal3_1.txt
+-rw-r--r-- 1 faris-al-fatih faris-al-fatih 0 Jun  6  2024 tmp/file-chal3_2.txt
+-rw-r--r-- 1 faris-al-fatih faris-al-fatih 0 Jun  6  2024 tmp/file-chal3_3.txt
+-rw-r--r-- 1 faris-al-fatih faris-al-fatih 45 Dec 30 14:31 logs/etl_log.txt
+-rw-r--r-- 1 faris-al-fatih faris-al-fatih  0 Jun  6  2024 logs/file-log-chal3_1.txt
+-rw-r--r-- 1 faris-al-fatih faris-al-fatih  0 Jun  6  2024 logs/file-log-chal3_2.txt
+-rw-r--r-- 1 faris-al-fatih faris-al-fatih  0 Jun  6  2024 logs/file-log-chal3_3.txt
+tmp/
+
+0 directories, 0 files
+.
+├── archive
+│   ├── backup_2025-12-30_14-26-17
+│   └── latest -> archive/backup_2025-12-30_14-26-17/*
+├── logs
+│   ├── etl_log.txt
+│   ├── file-log-chal3_1.txt
+│   ├── file-log-chal3_2.txt
+│   └── file-log-chal3_3.txt
+├── production
+├── raw
+│   ├── data_1.csv
+│   ├── data_2.csv
+│   ├── data_3.csv
+│   ├── data_4.csv
+│   └── data_5.csv
+├── staging
+│   ├── data_1.csv
+│   ├── data_2.csv
+│   ├── data_3.csv
+│   ├── data_4.csv
+│   └── data_5.csv
+└── tmp
+
+8 directories, 15 files
+.
+├── archive
+│   └── latest -> archive/backup_2025-12-30_14-26-17/*
+├── logs
+│   ├── etl_log.txt
+│   ├── file-log-chal3_1.txt
+│   ├── file-log-chal3_2.txt
+│   └── file-log-chal3_3.txt
+├── raw
+│   ├── data_1.csv
+│   ├── data_2.csv
+│   ├── data_3.csv
+│   ├── data_4.csv
+│   └── data_5.csv
+└── staging
+    ├── data_1.csv
+    ├── data_2.csv
+    ├── data_3.csv
+    ├── data_4.csv
+    └── data_5.csv
+
+5 directories, 15 files
+logs/
+├── etl_log.txt
+├── file-log-chal3_1.txt.gz
+├── file-log-chal3_2.txt.gz
+└── file-log-chal3_3.txt.gz
+
+1 directory, 4 files
+```
