@@ -729,3 +729,164 @@ logs/
 
 1 directory, 4 files
 ```
+## Permission & Ownership Linux 2025-12-30 15:50:54
+### Persiapan Lab sub bab 2 - 2025-12-30 15:52:25
+```text
+[drwxr-xr-x]  .
+├── [drwxr-xr-x]  data
+│   ├── [drwxr-xr-x]  processed
+│   │   └── [-rw-r--r--]  report.csv
+│   ├── [drwxr-xr-x]  raw
+│   │   └── [-rw-r--r--]  sales.csv
+│   └── [drwxr-xr-x]  sensitive
+│       └── [-rw-r--r--]  crendentials.txt
+├── [drwxr-xr-x]  logs
+│   └── [-rw-r--r--]  app.log
+└── [drwxr-xr-x]  scripts
+    └── [-rw-r--r--]  etl.sh
+
+7 directories, 5 files
+```
+*Note:* struktur diatas adalah struktur latihan dan permission awal
+### Flow 1: Melihat Permission - 2025-12-30 16:03:56
+*Tujuan Flow:* Bisa membaca permission
+#### Dengan ls -l atau tree -p bisa melihat detail termasuk permision dalam format symbolic(-rwx------), karakter pertama merupakan tipe misal - berarti tipenya file dan d berarti folder, lalu karakter ke 2-4 merupakan hak akses owner/user(u), karakter ke 5-7 merupakan akses group(g), karakter ke 8-10 merupakan hak akses ke semua user lain/orthers(o). karakter hak akses itu formatnya adalah r(read), w(write), x(execute). misal ownwr mimiliki akses rwx maka owner bisa melihat, menulis(bisa edit, delete, dll), execute/menjalankan program
+```text
+total 20
+drwxr-xr-x  5 faris-al-fatih faris-al-fatih 4096 Dec 30 15:54 .
+drwxr-xr-x 13 faris-al-fatih faris-al-fatih 4096 Dec 30 14:23 ..
+drwxr-xr-x  5 faris-al-fatih faris-al-fatih 4096 Dec 30 15:54 data
+drwxr-xr-x  2 faris-al-fatih faris-al-fatih 4096 Dec 30 15:57 logs
+drwxr-xr-x  2 faris-al-fatih faris-al-fatih 4096 Dec 30 15:57 scripts
+[drwxr-xr-x]  .
+├── [drwxr-xr-x]  data
+│   ├── [drwxr-xr-x]  processed
+│   │   └── [-rw-r--r--]  report.csv
+│   ├── [drwxr-xr-x]  raw
+│   │   └── [-rw-r--r--]  sales.csv
+│   └── [drwxr-xr-x]  sensitive
+│       └── [-rw-r--r--]  crendentials.txt
+├── [drwxr-xr-x]  logs
+│   └── [-rw-r--r--]  app.log
+└── [drwxr-xr-x]  scripts
+    └── [-rw-r--r--]  etl.sh
+
+7 directories, 5 files
+```
+#### ls -ld data/ - melihat permission dari folder data (l-list, d=directory)
+```text
+drwxr-xr-x 5 faris-al-fatih faris-al-fatih 4096 Dec 30 15:54 data/
+```
+#### ls -laR /data - menampilkan list(ls), dengan format longlist (l), lihat semua file termasuk file tersembunyi/all(a), dan menampilkan isi dari sub directory secarakeseluruhan/recursive(R) dari directory /data
+```text
+data/:
+total 20
+drwxr-xr-x 5 faris-al-fatih faris-al-fatih 4096 Dec 30 15:54 .
+drwxr-xr-x 5 faris-al-fatih faris-al-fatih 4096 Dec 30 15:54 ..
+drwxr-xr-x 2 faris-al-fatih faris-al-fatih 4096 Dec 30 15:57 processed
+drwxr-xr-x 2 faris-al-fatih faris-al-fatih 4096 Dec 30 15:57 raw
+drwxr-xr-x 2 faris-al-fatih faris-al-fatih 4096 Dec 30 15:57 sensitive
+
+data/processed:
+total 8
+drwxr-xr-x 2 faris-al-fatih faris-al-fatih 4096 Dec 30 15:57 .
+drwxr-xr-x 5 faris-al-fatih faris-al-fatih 4096 Dec 30 15:54 ..
+-rw-r--r-- 1 faris-al-fatih faris-al-fatih    0 Dec 30 15:57 report.csv
+
+data/raw:
+total 8
+drwxr-xr-x 2 faris-al-fatih faris-al-fatih 4096 Dec 30 15:57 .
+drwxr-xr-x 5 faris-al-fatih faris-al-fatih 4096 Dec 30 15:54 ..
+-rw-r--r-- 1 faris-al-fatih faris-al-fatih    0 Dec 30 15:57 sales.csv
+
+data/sensitive:
+total 8
+drwxr-xr-x 2 faris-al-fatih faris-al-fatih 4096 Dec 30 15:57 .
+drwxr-xr-x 5 faris-al-fatih faris-al-fatih 4096 Dec 30 15:54 ..
+-rw-r--r-- 1 faris-al-fatih faris-al-fatih    0 Dec 30 15:57 crendentials.txt
+```
+#### stat data/raw/sales.csv - menampilkan 1 data dengan detail lengkap, cocok digunakan ketika ingin melihat 1 data, jika melihat banyak data lebih baik menggunakan list
+```text
+  File: data/raw/sales.csv
+  Size: 0         	Blocks: 0          IO Block: 4096   regular empty file
+Device: 8,48	Inode: 87722       Links: 1
+Access: (0644/-rw-r--r--)  Uid: ( 1000/faris-al-fatih)   Gid: ( 1000/faris-al-fatih)
+Access: 2025-12-30 15:57:00.455524242 +0700
+Modify: 2025-12-30 15:57:00.455524242 +0700
+Change: 2025-12-30 15:57:00.455524242 +0700
+ Birth: 2025-12-30 15:57:00.455524242 +0700
+```
+#### -c "%a %n" data/* - karena output stat panjang karena mengambil semua data untuk melihat hanya permission dalam octal perintah ini mengambil custom format(c) dari permission numeric/acces rights(a) dan nama file/dirctory/name(n) dari semua isi (*) yang ada pada directory data
+```text
+755 data/processed
+755 data/raw
+755 data/sensitive
+```
+*Note:* pada stat diatas bisa dilihat bahwa tampilan permission dalam format octal, cara menghitungnya seperti ini: nilai dari caracter symbolix; r=4, w=2, x=1. jadi permission 755 berarti user/ownwe dapat membaca, menulis, dan menjalankan(Akses Penuh), group dan other hanya dapat membaca dan execute
+### Flow 2: Mengubah Permission (chmod/change mode) - 2025-12-30 17:11:02
+*Tujuan flow:* Mahir menggunakan chmod symbolic dan numeric/octal mode
+#### chmod -v u+x scripts/etl.sh - menggunakan chmod untuk file tunggal, disini ubah u(user/owner) agar bisa execute, verbose(v) digunakan untuk menampilkan informasi detail - 2025-12-30 17:19:42
+```text
+mode of 'scripts/etl.sh' changed from 0644 (rw-r--r--) to 0744 (rwxr--r--)
+```
+#### chmod u+rwx,g+rx,o+r digunakan untuk merubah permission symbolic multi changes - 2025-12-30 17:25:28
+```text
+mode of 'scripts/etl.sh' changed from 0744 (rwxr--r--) to 0754 (rwxr-xr--)
+```
+#### chmod 755 set permission numeric mode - 2025-12-30 17:28:58
+```text
+mode of 'scripts/etl.sh' changed from 0754 (rwxr-xr--) to 0755 (rwxr-xr-x)
+```
+#### chmod 700 ubah jadi private - 2025-12-30 17:33:26
+```text
+mode of 'data/sensitive/' changed from 0755 (rwxr-xr-x) to 0700 (rwx------)
+```
+#### chmod 644 Read Only biasanya untuk log - 2025-12-30 17:34:42
+```text
+mode of 'logs/app.log' retained as 0644 (rw-r--r--)
+```
+#### chmod -R 755 recrusive(R) mengubah izin untuk keseluruhan isi dalam suatu folder - 2025-12-30 17:38:09
+```text
+mode of 'data/processed/' retained as 0755 (rwxr-xr-x)
+mode of 'data/processed/report.csv' changed from 0644 (rw-r--r--) to 0755 (rwxr-xr-x)
+```
+### Flow 3: Ownership (chown(change owner)/chgrp(change group)) - 2025-12-30 18:14:37
+*Tujuan Flow:* Mahir mengatur ownership
+#### Lihat current user dan groups (whoami (who am I) digunakan untuk mengetahui nama user yang sedang login, id (identity) menampilkan identitas lengkap user berupa UID, GID, dan seluruh group yang melekat, groups (groups) digunakan untuk melihat daftar group yang dimiliki user secara ringkas)- 2025-12-30 18:15:58
+```text
+faris-al-fatih
+uid=1000(faris-al-fatih) gid=1000(faris-al-fatih) groups=1000(faris-al-fatih),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),100(users)
+faris-al-fatih adm cdrom sudo dip plugdev users
+```
+#### chown faris-al-fatih:faris-al-fatih digunakan untuk mengubah ownership bagian pertama melambangkan user(ouner) : bagian kedua menggambarkan group - 2025-12-30 18:23:09
+```text
+ownership of 'data/raw/sales.csv' retained as faris-al-fatih:faris-al-fatih
+```
+#### chgrp mengubah group saja 1 variabel - 2025-12-30 18:31:25
+```text
+group of 'data/processed/report.csv' retained as faris-al-fatih
+```
+#### chown -R(Recursive) digunakan untuk merubah kepemilikan keseluruhan isi dalam folder - 2025-12-30 18:34:33
+```text
+ownership of 'data/' retained as faris-al-fatih:faris-al-fatih
+```
+### Flow 4: Permission untuk Data Security - 2025-12-30 18:36:40
+```text
+mode of 'data/sensitive/crendentials.txt' changed from 0644 (rw-r--r--) to 0600 (rw-------)
+mode of 'data/sensitive/' retained as 0700 (rwx------)
+mode of 'scripts/etl.sh' changed from 0755 (rwxr-xr-x) to 0555 (r-xr-xr-x)
+```
+### Flow 5: Shared Folder Setup - 2025-12-30 18:41:46
+```text
+mkdir: created directory 'shared_data'
+mode of 'shared_data/' retained as 0755 (rwxr-xr-x)
+mode of 'shared_data/team_report.csv' changed from 0644 (rw-r--r--) to 0664 (rw-rw-r--)
+  File: shared_data/
+  Size: 4096      	Blocks: 8          IO Block: 4096   directory
+Device: 8,48	Inode: 64221       Links: 2
+Access: (0755/drwxr-xr-x)  Uid: ( 1000/faris-al-fatih)   Gid: ( 1000/faris-al-fatih)
+Access: 2025-12-30 18:44:33.868968366 +0700
+Modify: 2025-12-30 18:44:32.720968366 +0700
+Change: 2025-12-30 18:44:32.720968366 +0700
+ Birth: 2025-12-30 18:42:56.947023316 +0700
+```
