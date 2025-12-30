@@ -890,3 +890,32 @@ Modify: 2025-12-30 18:44:32.720968366 +0700
 Change: 2025-12-30 18:44:32.720968366 +0700
  Birth: 2025-12-30 18:42:56.947023316 +0700
 ```
+### SUID (Set User ID) - 2025-12-30 19:32:22
+```text
+mode of 'scripts/etl.sh' changed from 0555 (r-xr-xr-x) to 4555 (r-sr-xr-x)
+mode of 'scripts/etl.sh' changed from 4555 (r-sr-xr-x) to 4755 (rwsr-xr-x)
+```
+*Note:* s(setuid) boleh execute tapi dengan hak root, octanya adalah 4 ditaruh awal
+### SGID (Set Group ID) - 2025-12-30 19:49:10
+```text
+mode of 'shared_data/' changed from 0755 (rwxr-xr-x) to 2755 (rwxr-sr-x)
+mode of 'shared_data/' changed from 2755 (rwxr-sr-x) to 2775 (rwxrwsr-x)
+```
+*Note:* SGID (Set Group ID) digunakan pada direktori agar setiap file atau folder baru yang dibuat di dalamnya otomatis mewarisi group direktori tersebut, sehingga kepemilikan group tetap konsisten untuk kerja tim atau pipeline data tanpa perlu mengubah permission secara manual, octanya adalah 2. 
+### Sticky Bit - 2025-12-30 19:55:52
+```text
+mode of 'shared_data/' changed from 2775 (rwxrwsr-x) to 3775 (rwxrwsr-t)
+mode of 'shared_data/' changed from 3775 (rwxrwsr-t) to 3777 (rwxrwsrwt)
+```
+*Note:* Sticky Bit digunakan pada direktori agar hanya pemilik file (atau root) yang bisa menghapus atau mengganti file di dalam folder tersebut, meskipun direktori bersifat writable untuk semua user. Ini mencegah user saling menghapus file orang lain pada folder bersama seperti shared workspace atau /tmp, octanya 1
+### umask - Default Permission - 2025-12-30 20:00:51
+```text
+0022
+0027
+-rw-r----- 1 faris-al-fatih faris-al-fatih 0 Dec 30 20:04 newfile.txt
+```
+*Note:* umask digunakan untuk menentukan permission default saat file atau folder BARU dibuat. Nilai umask akan mengurangi permission dasar sistem (file 666, folder 777). Contoh umask 022 menghasilkan file 644 dan folder 755, sedangkan umask 027 menghasilkan file 640 dan folder 750 sehingga akses lebih ketat. umask bisa diset sementara lewat terminal untuk sesi aktif, atau permanen dengan menambahkannya ke ~/.bashrc agar selalu diterapkan setiap login. Angka umask bersifat preventif, bukan mengubah file yang sudah ada.
+### ACL (Access Control List) digunakan untuk mengatur permission file atau direktori secara lebih detail daripada rwx standar, yaitu dengan memberi hak akses ke user atau group tertentu di luar owner, group, dan other. ACL dipakai saat model permission biasa tidak cukup, misalnya satu file perlu diakses beberapa user berbeda dengan hak berbeda tanpa mengubah ownership atau group utama. Ini umum di server, shared folder, dan environment data engineering untuk kontrol akses yang presisi. - 2025-12-30 20:08:41
+```text
+Note: Masih belum paham konsepnya dan sekarang tidak terlalu butuh
+```
