@@ -335,3 +335,232 @@ tmpfs           689M   28K  689M   1% /run/user/1000
 ./output/processed_data/sample_backup.csv
 ./tmp/sales_2024.csv
 ```
+### Globbing & Widcards - 2025-12-29 22-19-01
+```text
+link_input/sales_2024.csv
+link_input/sample.csv
+tmp/sales_2024.csv
+input/raw_data/customer.json
+input/raw_data/products.parquet
+input/raw_data/sales_2024.csv
+input/raw_data/sample.csv
+tmp/temp1.txt
+tmp/temp2.txt
+tmp/temp3.txt
+tmp/temp4.txt
+tmp/temp5.txt
+tmp/temp1.txt
+tmp/temp2.txt
+tmp/temp3.txt
+input/:
+raw_data
+
+output/:
+processed_data
+.
+├── archive
+├── corrent_log.txt -> logs/etl_log.txt
+├── input
+├── link_input -> /home/faris-al-fatih/linux-practical/lab/01-filesystem/input/raw_data/
+├── logs
+├── output
+├── scripts
+└── tmp
+
+8 directories, 1 file
+.
+├── archive
+├── corrent_log.txt -> logs/etl_log.txt
+├── file.bak
+├── file.txt
+├── input
+├── link_input -> /home/faris-al-fatih/linux-practical/lab/01-filesystem/input/raw_data/
+├── logs
+├── output
+├── report_feb.csv
+├── report_jan.csv
+├── report_mar.csv
+├── scripts
+└── tmp
+
+8 directories, 6 files
+```
+### File Descriptor & Redirection 2025-12-29 22:37:49
+```text
+/home/faris-al-fatih/linux-practical/lab/01-filesystem
+.
+├── archive
+│   └── raw_backup_20251229
+│       ├── customer.json
+│       ├── products.parquet
+│       ├── sales_2024.csv
+│       └── sample.csv
+├── corrent_log.txt -> logs/etl_log.txt
+├── file.bak
+├── file.txt
+├── input
+│   └── raw_data
+│       ├── customer.json
+│       ├── products.parquet
+│       ├── sales_2024.csv
+│       └── sample.csv
+├── link_input -> /home/faris-al-fatih/linux-practical/lab/01-filesystem/input/raw_data/
+├── logs
+│   ├── etl_log.txt
+│   └── etl_status.json
+├── output
+│   └── processed_data
+│       └── sample_backup.csv
+├── report_feb.csv
+├── report_jan.csv
+├── report_mar.csv
+├── scripts
+└── tmp
+    ├── sales_2024.csv
+    ├── temp1.txt
+    ├── temp2.txt
+    ├── temp3.txt
+    ├── temp4.txt
+    └── temp5.txt
+
+11 directories, 23 files
+./file.txt
+./logs/etl_log.txt
+./tmp/temp5.txt
+./tmp/temp1.txt
+./tmp/temp3.txt
+./tmp/temp4.txt
+./tmp/temp2.txt
+17 file_list.txt
+18 file_list.txt
+415 errors_root.txt
+0 all_output.txt
+19 all_output.txt
+0
+```
+### xargs untuk Bach Processing 2025-12-30 13:05:41
+```text
+./input/raw_data/sales_2024.csv
+./input/raw_data/sample.csv
+./report_mar.csv
+./practice_tree3/many/file014.csv
+./practice_tree3/many/file009.csv
+./practice_tree3/many/file012.csv
+./practice_tree3/many/file007.csv
+./practice_tree3/many/file005.csv
+./practice_tree3/many/file017.csv
+./practice_tree3/many/file016.csv
+./practice_tree3/many/file002.csv
+./practice_tree3/many/file011.csv
+./practice_tree3/many/file013.csv
+./practice_tree3/many/file010.csv
+./practice_tree3/many/file020.csv
+./practice_tree3/many/file006.csv
+./practice_tree3/many/file015.csv
+./practice_tree3/many/file004.csv
+./practice_tree3/many/file008.csv
+./practice_tree3/many/file019.csv
+./practice_tree3/many/file001.csv
+./practice_tree3/many/file018.csv
+./practice_tree3/many/file003.csv
+./output/processed_data/sample_backup.csv
+./archive/raw_backup_20251229/sales_2024.csv
+./archive/raw_backup_20251229/sample.csv
+./report_feb.csv
+./practice_tree2/-dashstart.csv
+./practice_tree2/nested/another.csv
+./practice_tree2/weird$name.csv
+./practice_tree2/data-2.csv
+./practice_tree2/data 1.csv
+./report_jan.csv
+./practice_tree1/a.csv
+./practice_tree1/report_jan.csv
+./practice_tree1/b.csv
+./practice_tree1/subdir/inner.csv
+./tmp/sales_2024.csv
+ 0 ./input/raw_data/sales_2024.csv
+ 1 ./input/raw_data/sample.csv
+ 0 ./report_mar.csv
+ 1 ./output/processed_data/sample_backup.csv
+ 0 ./archive/raw_backup_20251229/sales_2024.csv
+ 1 ./archive/raw_backup_20251229/sample.csv
+ 0 ./report_feb.csv
+ 0 ./report_jan.csv
+ 0 ./tmp/sales_2024.csv
+ 3 total
+archive/
+└── raw_backup_20251229
+    ├── customer.json
+    ├── products.parquet
+    ├── sales_2024.csv
+    └── sample.csv
+
+2 directories, 4 files
+2025-12-30 13:37:42 - log = 0
+./xargs-train4.log
+./xargs-train5.log
+./xargs-train2.log
+./xargs-train3.log
+./xargs-train1.log
+archive/
+├── raw_backup_20251229
+│   ├── customer.json
+│   ├── products.parquet
+│   ├── sales_2024.csv
+│   └── sample.csv
+├── xargs-train1.log
+├── xargs-train2.log
+├── xargs-train3.log
+├── xargs-train4.log
+└── xargs-train5.log
+
+2 directories, 9 files
+.
+├── all_output.txt
+├── archive
+├── corrent_log.txt -> logs/etl_log.txt
+├── errors_root.txt
+├── file.bak
+├── file.txt
+├── file_list.txt
+├── input
+├── link_input -> /home/faris-al-fatih/linux-practical/lab/01-filesystem/input/raw_data/
+├── logs
+├── output
+├── report_feb.csv
+├── report_jan.csv
+├── report_mar.csv
+├── scripts
+├── tmp
+├── xargs-train1.log
+├── xargs-train2.log
+├── xargs-train3.log
+├── xargs-train4.log
+└── xargs-train5.log
+
+8 directories, 14 files
+.
+├── all_output.txt
+├── archive
+├── corrent_log.txt -> logs/etl_log.txt
+├── errors_root.txt
+├── file.bak
+├── file.txt
+├── file_list.txt
+├── input
+├── link_input -> /home/faris-al-fatih/linux-practical/lab/01-filesystem/input/raw_data/
+├── logs
+├── output
+├── report_feb.csv.gz
+├── report_jan.csv.gz
+├── report_mar.csv.gz
+├── scripts
+├── tmp
+├── xargs-train1.log
+├── xargs-train2.log
+├── xargs-train3.log
+├── xargs-train4.log
+└── xargs-train5.log
+
+8 directories, 14 files
+```

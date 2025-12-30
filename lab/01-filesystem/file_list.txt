@@ -1,0 +1,18 @@
+total 36
+drwxr-xr-x  8 faris-al-fatih faris-al-fatih 4096 Dec 30 12:37 .
+drwxr-xr-x 12 faris-al-fatih faris-al-fatih 4096 Dec 29 20:04 ..
+drwxr-xr-x  3 faris-al-fatih faris-al-fatih 4096 Dec 29 21:19 archive
+lrwxrwxrwx  1 faris-al-fatih faris-al-fatih   16 Dec 29 21:39 corrent_log.txt -> logs/etl_log.txt
+-rw-r--r--  1 faris-al-fatih faris-al-fatih    0 Dec 29 22:34 file.bak
+-rw-r--r--  1 faris-al-fatih faris-al-fatih    0 Dec 29 22:34 file.txt
+-rw-r--r--  1 faris-al-fatih faris-al-fatih    0 Dec 30 12:41 file_list.txt
+drwxr-xr-x  3 faris-al-fatih faris-al-fatih 4096 Dec 29 20:42 input
+lrwxrwxrwx  1 faris-al-fatih faris-al-fatih   70 Dec 29 21:30 link_input -> /home/faris-al-fatih/linux-practical/lab/01-filesystem/input/raw_data/
+drwxr-xr-x  2 faris-al-fatih faris-al-fatih 4096 Dec 29 21:16 logs
+drwxr-xr-x  3 faris-al-fatih faris-al-fatih 4096 Dec 29 20:42 output
+-rw-r--r--  1 faris-al-fatih faris-al-fatih    0 Dec 29 22:35 report_feb.csv
+-rw-r--r--  1 faris-al-fatih faris-al-fatih    0 Dec 29 22:35 report_jan.csv
+-rw-r--r--  1 faris-al-fatih faris-al-fatih    0 Dec 29 22:35 report_mar.csv
+drwxr-xr-x  2 faris-al-fatih faris-al-fatih 4096 Dec 29 20:42 scripts
+drwxr-xr-x  2 faris-al-fatih faris-al-fatih 4096 Dec 29 21:20 tmp
+new line
