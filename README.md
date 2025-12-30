@@ -253,7 +253,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🔄 Changelog
 
-Lihat [changelog.md](changelog.md) untuk riwayat perubahan.
+Lihat [learning.log.md](learning.log.md) untuk riwayat belajar.
 
 ---
 
