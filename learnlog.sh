@@ -19,6 +19,7 @@ objective() {
 }
 
 context() {
+  echo -e "\n" >> "$LOG"
   echo "**Context** - $(TS)" >> "$LOG"
   echo "- User: $(whoami)" >> "$LOG"
   echo "- Dir: $(pwd)" >> "$LOG"
@@ -31,6 +32,7 @@ expected() {
 }
 
 run() {
+  echo -e "\n" >> "$LOG"
   echo "**Command** - $(TS)" >> "$LOG"
   echo '```bash' >> "$LOG"
   echo "$*" >> "$LOG"
@@ -61,11 +63,13 @@ actual() {
 }
 
 error() {
+  echo -e "\n" >> "$LOG"
   echo "**Error / Mistake** - $(TS)" >> "$LOG"
   for e in "$@"; do echo "- $e" >> "$LOG"; done
 }
 
 insight() {
+  echo -e "\n" >> "$LOG"
   echo "**Insight** - $(TS)" >> "$LOG"
   for i in "$@"; do echo "- $i" >> "$LOG"; done
 }
