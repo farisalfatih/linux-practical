@@ -919,3 +919,75 @@ mode of 'shared_data/' changed from 3775 (rwxrwsr-t) to 3777 (rwxrwsrwt)
 ```text
 Note: Masih belum paham konsepnya dan sekarang tidak terlalu butuh
 ```
+### Challenge 1: Setup Project Permission - 2025-12-30 20:35:21
+```text
+.:
+total 24
+drwxr-x---  6 faris-al-fatih faris-al-fatih 4096 Dec 30 20:38 .
+drwxr-xr-x 14 faris-al-fatih faris-al-fatih 4096 Dec 30 20:31 ..
+drwxr-xr-x  2 faris-al-fatih faris-al-fatih 4096 Dec 30 20:31 logs
+drwx------  2 faris-al-fatih faris-al-fatih 4096 Dec 30 20:41 private
+drwxr-xr-x  2 faris-al-fatih faris-al-fatih 4096 Dec 30 20:39 public
+drwxr-xr-x  2 faris-al-fatih faris-al-fatih 4096 Dec 30 20:43 scripts
+
+./logs:
+total 8
+drwxr-xr-x 2 faris-al-fatih faris-al-fatih 4096 Dec 30 20:31 .
+drwxr-x--- 6 faris-al-fatih faris-al-fatih 4096 Dec 30 20:38 ..
+
+./private:
+total 8
+drwx------ 2 faris-al-fatih faris-al-fatih 4096 Dec 30 20:41 .
+drwxr-x--- 6 faris-al-fatih faris-al-fatih 4096 Dec 30 20:38 ..
+-rw------- 1 faris-al-fatih faris-al-fatih    0 Dec 30 20:41 secret.key
+
+./public:
+total 8
+drwxr-xr-x 2 faris-al-fatih faris-al-fatih 4096 Dec 30 20:39 .
+drwxr-x--- 6 faris-al-fatih faris-al-fatih 4096 Dec 30 20:38 ..
+-rw-r--r-- 1 faris-al-fatih faris-al-fatih    0 Dec 30 20:39 readme.txt
+
+./scripts:
+total 8
+drwxr-xr-x 2 faris-al-fatih faris-al-fatih 4096 Dec 30 20:43 .
+drwxr-x--- 6 faris-al-fatih faris-al-fatih 4096 Dec 30 20:38 ..
+-rwxr-xr-x 1 faris-al-fatih faris-al-fatih    0 Dec 30 20:44 run.sh
+```
+### Challenge 2: Team Collaboration Folder - 2025-12-31 11:05:44
+```text
+mkdir: created directory '/data'
+mkdir: created directory '/data/team_analytics'
+drwxrwsrwt 2 root analytics 4096 Dec 31 11:10 /data/team_analytics/
+```
+*Notes:* Folder `/data/team_analytics` dibuat sebagai shared workspace tim dengan alur yang jelas: pertama direktori dibuat di luar `/home` karena ini resource bersama, lalu group `analytics` dibentuk dan user dimasukkan agar kontrol akses berbasis group, bukan individu; ownership diubah ke group supaya semua anggota punya hak setara; permission `2775` dipakai untuk mengaktifkan **SGID** agar setiap file/folder baru otomatis mewarisi group `analytics` sehingga tidak terjadi kekacauan ownership; terakhir **sticky bit** diaktifkan supaya tiap user hanya bisa menghapus file miliknya sendiri dan tidak bisa merusak kerja orang lain—hasil akhirnya adalah folder kolaborasi yang rapi, aman, dan konsisten, bukan shared folder bodoh ala `chmod 777` yang cuma dipakai orang malas mikir.
+### Challenge 3: Secure Data Pipeline - 2025-12-31 11:22:30
+```text
+mkdir: created directory '/pipeline'
+mkdir: created directory '/pipeline/input'
+mkdir: created directory '/pipeline/processing'
+mkdir: created directory '/pipeline/output'
+mkdir: created directory '/pipeline/credentials'
+mode of '/pipeline/input/' retained as 0755 (rwxr-xr-x)
+mode of '/pipeline/processing/' changed from 0755 (rwxr-xr-x) to 0700 (rwx------)
+mode of '/pipeline/output/' changed from 0755 (rwxr-xr-x) to 0750 (rwxr-x---)
+mode of '/pipeline/credentials/' changed from 0755 (rwxr-xr-x) to 0700 (rwx------)
+renamed '/data/' -> '/home/faris-al-fatih/linux-practical/lab/02-challange/data'
+renamed 'pipeline/' -> '/home/faris-al-fatih/linux-practical/lab/02-challange/pipeline'
+[drwxr-x---]  .
+├── [drwxr-xr-x]  data
+│   └── [drwxrwsrwt]  team_analytics
+├── [drwxr-xr-x]  logs
+├── [drwxr-xr-x]  pipeline
+│   ├── [drwx------]  credentials  [error opening dir]
+│   ├── [drwxr-xr-x]  input
+│   ├── [drwxr-x---]  output  [error opening dir]
+│   └── [drwx------]  processing  [error opening dir]
+├── [drwx------]  private
+│   └── [-rw-------]  secret.key
+├── [drwxr-xr-x]  public
+│   └── [-rw-r--r--]  readme.txt
+└── [drwxr-xr-x]  scripts
+    └── [-rwxr-xr-x]  run.sh
+
+12 directories, 3 files
+```
