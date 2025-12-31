@@ -1091,3 +1091,65 @@ localhost
 ```text
 1092
 ```
+### Flow 0: Persiapan Lab - 2025-12-31 19:49:51
+```text
+/home/faris-al-fatih/linux-practical/lab/03-env-variable
+.
+├── configs
+│   └── .env
+└── scripts
+    └── app.sh
+
+3 directories, 2 files
+```
+### Flow 1: Melihat Environment Variable - 2025-12-31 19:57:12
+#### Lihat semua  env - 2025-12-31 20:01:01 - printenv
+```text
+SHELL=/bin/bash
+COLORTERM=truecolor
+VSCODE_DEBUGPY_ADAPTER_ENDPOINTS=/home/faris-al-fatih/.vscode-server/extensions/ms-python.debugpy-2025.18.0-linux-x64/.noConfigDebugAdapterEndpoints/endpoint-b5337dbd258613f6.txt
+WSL2_GUI_APPS_ENABLED=1
+TERM_PROGRAM_VERSION=1.107.1
+```
+#### Lihat Beberapa Variabel Penting - 2025-12-31 20:15:29
+```text 
+User: faris-al-fatih
+Home: /home/faris-al-fatih
+Shell: /bin/bash
+Path: /home/faris-al-fatih/.vscode-server/data/User/globalStorage/github.copilot-chat/debugCommand:/home/faris-al-fatih/.vscode-server/data/User/globalStorage/github.copilot-chat/copilotCli:/home/faris-al-fatih/.vscode-server/bin/994fd12f8d3a5aa16f17d42c041e5809167e845a/bin/remote-cli:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Program Files/WindowsApps/MicrosoftCorporationII.WindowsSubsystemForLinux_2.6.2.0_x64__8wekyb3d8bbwe:/mnt/c/Windows/system32:/mnt/c/Windows:/mnt/c/Windows/System32/Wbem:/mnt/c/Windows/System32/WindowsPowerShell/v1.0/:/mnt/c/Windows/System32/OpenSSH/:/mnt/c/Program Files/Google/Chrome/Application/:/mnt/c/Program Files/Git/cmd:/mnt/c/Program Files/Cloudflare/Cloudflare WARP/:/mnt/c/Users/Faris Al Fatih/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/Faris Al Fatih/AppData/Local/Programs/Microsoft VS Code/bin:/mnt/c/Users/Faris Al Fatih/AppData/Local/GitHubDesktop/bin:/snap/bin:/home/faris-al-fatih/.vscode-server/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/scripts/noConfigScripts
+PWD: /home/faris-al-fatih/linux-practical/lab/03-env-variable
+```
+#### Filter env - 2025-12-31 20:56:00
+*printenv | grep HOME*
+```text
+printenv | grep HOME
+```
+*env | grep HOME*
+```text
+env | grep HOME
+```
+#### Lihat semua Variable (Termasuk Shell Variable) - set | head -5 - 2025-12-31 20:57:13
+```text
+BASH=/bin/bash
+BASHOPTS=checkwinsize:cmdhist:complete_fullquote:expand_aliases:extglob:extquote:force_fignore:globasciiranges:globskipdots:histappend:interactive_comments:patsub_replacement:progcomp:promptvars:sourcepath
+BASH_ALIASES=()
+BASH_ARGC=([0]="0")
+BASH_ARGV=()
+```
+### Flow 2: Membuat dan Mengubah Variable - 2025-12-31 20:59:30
+```bash
+# Shell variable (tidak diexport)
+MY_NAME="Data Engineer"
+echo $MY_NAME
+```
+```text
+Data Enginner
+```
+```bash
+# Environment variable (diexport)
+export PROJECT_NAME="ETL Pipeline"
+echo $PROJECT_NAME
+```
+```text
+ETL Pipeline
+```
