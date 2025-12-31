@@ -991,3 +991,103 @@ renamed 'pipeline/' -> '/home/faris-al-fatih/linux-practical/lab/02-challange/pi
 
 12 directories, 3 files
 ```
+## Modul 3: Enviroment Variable Linux - 2025-12-31 12:26:41
+### Commad Dasar Melihan Environment Variable - 2025-12-31 12:50:47
+#### printv: Menampilkan semua env var - 2025-12-31 12:50:47
+```text
+SHELL=/bin/bash
+COLORTERM=truecolor
+VSCODE_DEBUGPY_ADAPTER_ENDPOINTS=/home/faris-al-fatih/.vscode-server/extensions/ms-python.debugpy-2025.18.0-linux-x64/.noConfigDebugAdapterEndpoints/endpoint-b5337dbd258613f6.txt
+WSL2_GUI_APPS_ENABLED=1
+TERM_PROGRAM_VERSION=1.107.1
+WSL_DISTRO_NAME=Ubuntu
+PYDEVD_DISABLE_FILE_VALIDATION=1
+NAME=Code
+PWD=/home/faris-al-fatih/linux-practical
+LOGNAME=faris-al-fatih
+```
+#### printv VAR(PATH): Menampilkan satu var - 2025-12-31 12:53:13
+```text
+/home/faris-al-fatih/.vscode-server/data/User/globalStorage/github.copilot-chat/debugCommand:/home/faris-al-fatih/.vscode-server/data/User/globalStorage/github.copilot-chat/copilotCli:/home/faris-al-fatih/.vscode-server/bin/994fd12f8d3a5aa16f17d42c041e5809167e845a/bin/remote-cli:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Program Files/WindowsApps/MicrosoftCorporationII.WindowsSubsystemForLinux_2.6.2.0_x64__8wekyb3d8bbwe:/mnt/c/Windows/system32:/mnt/c/Windows:/mnt/c/Windows/System32/Wbem:/mnt/c/Windows/System32/WindowsPowerShell/v1.0/:/mnt/c/Windows/System32/OpenSSH/:/mnt/c/Program Files/Google/Chrome/Application/:/mnt/c/Program Files/Git/cmd:/mnt/c/Program Files/Cloudflare/Cloudflare WARP/:/mnt/c/Users/Faris Al Fatih/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/Faris Al Fatih/AppData/Local/Programs/Microsoft VS Code/bin:/mnt/c/Users/Faris Al Fatih/AppData/Local/GitHubDesktop/bin:/snap/bin:/home/faris-al-fatih/.vscode-server/extensions/ms-python.debugpy-2025.18.0-linux-x64/bundled/scripts/noConfigScripts
+```
+#### env: tampilkan semua env var - 2025-12-31 12:55:50
+```text
+SHELL=/bin/bash
+COLORTERM=truecolor
+VSCODE_DEBUGPY_ADAPTER_ENDPOINTS=/home/faris-al-fatih/.vscode-server/extensions/ms-python.debugpy-2025.18.0-linux-x64/.noConfigDebugAdapterEndpoints/endpoint-b5337dbd258613f6.txt
+WSL2_GUI_APPS_ENABLED=1
+TERM_PROGRAM_VERSION=1.107.1
+```
+#### echo $VAR (echo $HOME): Menampilkan nilai var - 2025-12-31 12:59:43
+```text
+/home/faris-al-fatih
+```
+#### set: Menampilkan Semua variable (termasuk shell) - 2025-12-31 13:07:52
+```text
+BASH=/bin/bash
+BASHOPTS=checkwinsize:cmdhist:complete_fullquote:expand_aliases:extglob:extquote:force_fignore:globasciiranges:globskipdots:histappend:interactive_comments:patsub_replacement:progcomp:promptvars:sourcepath
+BASH_ALIASES=()
+BASH_ARGC=([0]="0")
+BASH_ARGV=()
+```
+### Membuat Variable - 2025-12-31 13:35:55
+#### VAR=value: hanya shell lokal, child/subshell tidak bisa akses - 2025-12-31 13:35:55
+*NAME="John"*
+```text
+John
+```
+#### export VAR=value: shell + child/subshell bisa akses - 2025-12-31 13:41:45
+*export NAME="Faris"*
+```text
+Faris
+```
+#### export VAR: variable sudah ada, sekarang bisa diakses child/subshell tanpa ubah nilainya - 2025-12-31 13:43:11
+*export NAME*
+```text
+Code
+```
+### Menghapus Variable - 2025-12-31 13:55:27
+#### unset VAR: menghapus variable sepenuhnya, tidak bisa diakses lagi - 2025-12-31 13:55:27
+*unset NAME*
+*declare -p NAME* : untuk cek
+*Log output ini coppy manual*
+```text
+bash: declare: NAME: not found
+```
+#### VAR=: set variable kosong, tetap ada tapi nilainya kosong 2025-12-31 14:08:26
+*NAME=*
+*declare -p NAME*
+```text
+declare -- NAME=""
+```
+### Manipulasi Variabel - 2025-12-31 14:14:57
+#### $VAR: Akses nilai - 2025-12-31 14:49:10
+*VAR="Test"*
+```text
+Test
+```
+#### ${VAR}: Akses dengan delimiter - 2025-12-31 14:50:03
+*echo ${VAR}/data*
+```text
+/data
+```
+#### ${VAR:-default}: Default jika kosong - 2025-12-31 14:50:41
+*echo ${DB_HOST:-localhost}*
+```text
+localhost
+```
+#### ${VAR:=default}: Set default jika kosong - 2025-12-31 14:51:48
+*echo ${DB_HOST:=localhost}*
+```text
+localhost
+```
+#### ${VAR:+alt}: Alt value jika ada - 2025-12-31 14:52:18
+*echo ${DEBUG:+--verbose}*
+```text
+--verbose
+```
+#### ${#VAR}: Length of value - 2025-12-31 14:53:19
+*echo ${#PATH}*
+```text
+1092
+```
