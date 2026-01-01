@@ -365,3 +365,183 @@ removed 'input/original-symplink.txt'
 
 **Insight** - 2026-01-01 15:43:33
 - jika ingin membaca link simbolic cari tau dimana dulu pathnya can baca dari path itu
+### Pencarian File - 2026-01-01 17:07:41
+#### Menggunakan find untuk pencarian - 2026-01-01 17:18:33
+**Objective** - 2026-01-01 17:29:27
+- Memahami cara dan variasi menggunakan find
+
+
+**Context** - 2026-01-01 17:29:40
+- User: faris-al-fatih
+- Dir: /home/faris-al-fatih/linux-practical
+- Shell: /bin/bash
+---
+**Expected** - 2026-01-01 17:30:48
+- Mencari File Beedasarkan nama
+
+
+**Command** - 2026-01-01 17:31:19
+```bash
+find . -name README
+```
+**Output (ringkas)** - 2026-01-01 17:31:19
+```text
+(no output)
+```
+
+
+**Error / Mistake** - 2026-01-01 17:34:38
+- tidak muncul karena yang dicari itu README dan tidak ada yang namanya README yang ada hanya README.md
+
+
+**Insight** - 2026-01-01 17:37:51
+- gunakan -iname untuk case insensitive
+
+
+**Command** - 2026-01-01 17:37:53
+```bash
+find . -iname README
+```
+**Output (ringkas)** - 2026-01-01 17:37:53
+```text
+(no output)
+```
+
+
+**Error / Mistake** - 2026-01-01 17:42:24
+- tidak muncul karena ekstensi filenya diabaikan oleh iname, iname hanya melakukan pengabaian carakter besar dan kecil
+
+
+**Insight** - 2026-01-01 17:44:05
+- gunakan wildcard untuk menangkap variasi nama
+
+
+**Command** - 2026-01-01 17:44:39
+```bash
+find . -iname ReaDme*
+```
+**Output (ringkas)** - 2026-01-01 17:44:39
+```text
+./README.md
+./docs/09-text-processing/README.md
+./docs/10-shell-scripting/README.md
+./docs/04-prosess/README.md
+./docs/08-cron/README.md
+./docs/01-filesystem/README.md
+./docs/06-networking/README.md
+./docs/02-permission/README.md
+./docs/03-env-variable/README.md
+./docs/05-archive-transfer/README.md
+(output dipotong)
+```
+---
+#### menggunakan find untuk mencari waktu - 2026-01-01 17:46:50
+
+
+**Command** - 2026-01-01 17:47:18
+```bash
+find . -mtime -4
+```
+**Output (ringkas)** - 2026-01-01 17:47:18
+```text
+.
+./learnlog.sh
+./README.md
+./docs
+./docs/09-text-processing
+./docs/09-text-processing/README.md
+./docs/10-shell-scripting
+./docs/10-shell-scripting/README.md
+./docs/04-prosess/README.md
+./docs/08-cron/README.md
+(output dipotong)
+```
+---
+#### Menggunakan find untuk mencari berdasarkan tipe object file system - 2026-01-01 17:50:40
+
+
+**Command** - 2026-01-01 17:51:37
+```bash
+find . -type d
+```
+**Output (ringkas)** - 2026-01-01 17:51:37
+```text
+.
+./docs
+./docs/09-text-processing
+./docs/10-shell-scripting
+./docs/04-prosess
+./docs/08-cron
+./docs/01-filesystem
+./docs/06-networking
+./docs/02-permission
+./docs/03-env-variable
+(output dipotong)
+```
+#### locate digunakan untuk pencarian file yang dibuat oleh library mlocate - 2026-01-01 17:59:36
+#### which hanya bisa digunakan untuk melihat execute program - 2026-01-01 18:00:34
+
+
+**Command** - 2026-01-01 18:00:47
+```bash
+wich code
+```
+**Output (ringkas)** - 2026-01-01 18:00:48
+```text
+Command 'wich' not found, did you mean:
+  command 'wick' from snap wick (0+git.e34b005)
+  command 'wcch' from deb wcc (0.0.2+dfsg-4.4)
+  command 'wish' from deb tk (8.6.13)
+  command 'which' from deb debianutils (5.14)
+  command 'which' from deb gnu-which (2.21+dfsg-3)
+See 'snap info <snapname>' for additional versions.
+```
+
+
+**Error / Mistake** - 2026-01-01 18:01:12
+- typo
+
+
+**Command** - 2026-01-01 18:01:23
+```bash
+which code
+```
+**Output (ringkas)** - 2026-01-01 18:01:23
+```text
+/home/faris-al-fatih/.vscode-server/bin/994fd12f8d3a5aa16f17d42c041e5809167e845a/bin/remote-cli/code
+```
+### Melihat isi file - 2026-01-01 18:01:45
+**Objective** - 2026-01-01 18:02:31
+- Mengetahui commend dasar untuk melihat isi file
+
+
+**Context** - 2026-01-01 18:06:39
+- User: faris-al-fatih
+- Dir: /home/faris-al-fatih/linux-practical
+- Shell: /bin/bash
+---
+**Expected** - 2026-01-01 18:11:28
+- menampilkan semua isi dari file learnlog.sh
+
+
+**Command** - 2026-01-01 18:11:44
+```bash
+cat learnlog.sh
+```
+**Output (ringkas)** - 2026-01-01 18:11:44
+```text
+LOG="$HOME/linux-practical/LEARNLOG.md"
+
+TS() {
+  date '+%Y-%m-%d %H:%M:%S'
+}
+
+sep() {
+  echo -e "---" >> "$LOG"
+}
+
+(output dipotong)
+```
+**Actual** - 2026-01-01 18:12:04
+- Eksekusi gagal (exit code )
+---
