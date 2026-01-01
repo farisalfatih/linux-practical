@@ -272,3 +272,96 @@ renamed 'file.txt' -> 'move/file.txt'
 ---
 **Tags**: #cp #mv
 ---
+### link(Symbolic & Hard) - 2026-01-01 14:18:53
+#### Persiapan folder latihan - 2026-01-01 14:26:57
+
+
+**Command** - 2026-01-01 14:58:40
+```bash
+(mkdir input output; echo 'connect' > input/original-symplink.txt; echo 'berhasil memanggil inode file, jika file asli dihapus linux tetap menyimpan informasi file sampai file dan semua hardlink dihapus' > input/original-hardlink.txt; tree; cat input/original-hardlink.txt; cat input/original-symplink.txt)
+```
+**Output (ringkas)** - 2026-01-01 14:58:40
+```text
+.
+├── input
+│   ├── original-hardlink.txt
+│   └── original-symplink.txt
+└── output
+
+3 directories, 2 files
+berhasil memanggil inode file, jika file asli dihapus linux tetap menyimpan informasi file sampai file dan semua hardlink dihapus
+connect
+```
+#### Skenario hardlink - 2026-01-01 15:02:35
+**Expected** - 2026-01-01 15:05:05
+- jika file asli di hapus dari maka hardlink tetap bisa menampilkan isi file karena inode yang menyimpan meta data belum dihapus
+
+
+**Command** - 2026-01-01 15:10:19
+```bash
+(ln input/original-hardlink.txt output/hardlink.txt; ls -i input/original-hardlink.txt; ls -i output/hardlink.txt)
+```
+**Output (ringkas)** - 2026-01-01 15:10:19
+```text
+87975 input/original-hardlink.txt
+87975 output/hardlink.txt
+```
+
+
+**Insight** - 2026-01-01 15:11:34
+- link berhasil dibuat dengan hardlink yang memiliki inode -i yang sama
+
+
+**Command** - 2026-01-01 15:14:57
+```bash
+(rm -v input/original-hardlink.txt; cat output/hardlink.txt)
+```
+**Output (ringkas)** - 2026-01-01 15:14:57
+```text
+removed 'input/original-hardlink.txt'
+berhasil memanggil inode file, jika file asli dihapus linux tetap menyimpan informasi file sampai file dan semua hardlink dihapus
+```
+
+
+**Insight** - 2026-01-01 15:16:27
+- percobaan berhasil dilakukan yang mana harlink bisa mengakses link meskipun file asli dihapus
+#### skenario Symbolic link (s) - 2026-01-01 15:18:01
+**Expected** - 2026-01-01 15:20:43
+- ketika file asli dihapus link tidak bisa mengaksesnya, readlink digunakan untuk melihat path link dari link jika path itu tidak ada/sudah diapus akan tetap di tampilkan, realpath digunakan untuk melihat path asli dari link jika sumber link dihapus akan error karena realpath melakukan verifikasi dulu
+
+
+**Command** - 2026-01-01 15:28:31
+```bash
+ln -s input/original-stplink.txt output/symplink.txt; tree
+```
+**Output (ringkas)** - 2026-01-01 15:28:32
+```text
+.
+├── input
+│   └── original-symplink.txt
+└── output
+    ├── hardlink.txt
+    └── symplink.txt -> input/original-stplink.txt
+
+3 directories, 3 files
+```
+
+
+**Command** - 2026-01-01 15:38:41
+```bash
+(cat output/symplink.txt; rm -v input/original-symplink.txt; readlink input/original-symplink.txt; realpath input/original-symplink.txt)
+```
+**Output (ringkas)** - 2026-01-01 15:38:41
+```text
+cat: output/symplink.txt: No such file or directory
+removed 'input/original-symplink.txt'
+/home/faris-al-fatih/linux-practical/lab/01-filesystem/commend-dasar/link/input/original-symplink.txt
+```
+
+
+**Error / Mistake** - 2026-01-01 15:41:59
+- cat tidak bisa digunakan untuk membaca symbolic link
+
+
+**Insight** - 2026-01-01 15:43:33
+- jika ingin membaca link simbolic cari tau dimana dulu pathnya can baca dari path itu
