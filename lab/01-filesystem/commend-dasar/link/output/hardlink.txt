@@ -1,0 +1,1 @@
+berhasil memanggil inode file, jika file asli dihapus linux tetap menyimpan informasi file sampai file dan semua hardlink dihapus
