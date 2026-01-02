@@ -35,6 +35,9 @@
 **📝 2026-01-01 22:34:19 - Notes**
 - kombinasikan `cd` dengan karakter khusus path
 - [Karakter Khusus Path](#2026-01-01-212716---karakter-khusus-path)
+
+👉 **[📂 LATIHAN NAVIGASI FILESYSTEM](log/01-filesystem/commad-dasar/navigasi.md)** 
+
 ### 2026-01-01 22:56:17 - Eksplorasi
 
 <div style="background-color:#1e1e1e; color:#ffffff; padding:10px; border-radius:12px; max-width:700px; margin:auto; font-family:monospace; line-height:1.5; box-shadow:0 4px 12px rgba(0,0,0,0.5);">
