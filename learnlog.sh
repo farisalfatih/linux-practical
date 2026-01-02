@@ -1,13 +1,13 @@
-LOG="$HOME/linux-practical/LEARNLOG.md"
+LOG="/home/faris-al-fatih/linux-practical/LEARNLOG.md"
 
 TS() {
   date '+%Y-%m-%d %H:%M:%S'
 }
 
-h1() { echo "# $1 - $(TS)" >> "$LOG"; }
-h2() { echo "## $1 - $(TS)" >> "$LOG"; }
-h3() { echo "### $1 - $(TS)" >> "$LOG"; }
-h4() { echo "#### $1 - $(TS)" >> "$LOG"; }
+h1() { echo "# $(TS) - $1" >> "$LOG"; }
+h2() { echo "## $(TS) - $1" >> "$LOG"; }
+h3() { echo "### $(TS) - $1" >> "$LOG"; }
+h4() { echo "#### $(TS) - $1" >> "$LOG"; }
 
 create_table() {
     read -p "Jumlah kolom: " col_count
@@ -68,19 +68,19 @@ create_table() {
 
 notes() {
   echo "" >> "$LOG"
-  echo "**📝 Notes - $(TS)**" >> "$LOG"
+  echo "**📝 $(TS) - Notes**" >> "$LOG"
 
-  echo "Masukkan notes (bullet). Ketik ':end' untuk selesai."
+  echo "Masukkan notes (bullet). Tekan ENTER kosong untuk selesai."
   while true; do
     read -p "> " item
-    [[ "$item" == ":end" ]] && break
+    [[ -z "$item" ]] && break   
     echo "- $item" >> "$LOG"
   done
 }
 
 flows() {
   echo "" >> "$LOG"
-  echo "**🔄 Flows - $(TS)**" >> "$LOG"
+  echo "**🔄 $(TS) - Flows**" >> "$LOG"
 
   echo "Masukkan langkah satu per satu. Ketik ':end' untuk selesai."
   count=1
@@ -93,24 +93,28 @@ flows() {
 }
 
 objective() {
-  echo "**🎯 Objective:** $* - $(TS)" >> "$LOG"
+  echo "**🎯 $(TS) - Objective:** $*" >> "$LOG"
 }
 
 context() {
-  echo "**📋 Context** - $(TS)" >> "$LOG"
+  echo "**📋 $(TS) - Context**" >> "$LOG"
   echo "- User: $(whoami)" >> "$LOG"
   echo "- Dir: $(pwd)" >> "$LOG"
   echo "- Shell: $SHELL" >> "$LOG"
+  echo "- Tree:" >> "$LOG"
+  echo '```text' >> "$LOG"
+  tree >> "$LOG"
+  echo '```' >> "$LOG"
 }
 
 expected() {
-  echo "**📌 Expected:** $* - $(TS)" >> "$LOG"
+  echo "**📌 $(TS) - Expected:** $*" >> "$LOG"
 }
 
 
 # Commend complex gunakan: run bash -c
 run() {
-  echo "**💻 Command** - $(TS)" >> "$LOG"
+  echo "**💻 $(TS) - Command**" >> "$LOG"
   echo '```bash' >> "$LOG"
   printf '%q ' "$@" >> "$LOG"
   echo >> "$LOG"
@@ -119,23 +123,21 @@ run() {
   OUT=$("$@" 2>&1)
   RC=$?
 
-  echo "**🖥️ Output (ringkas)** - $(TS)" >> "$LOG"
-  echo '```text' >> "$LOG"
-  if [ -z "$OUT" ]; then
-    echo "(no output)" >> "$LOG"
-  else
+  # Tampilkan output hanya jika ada
+  if [ -n "$OUT" ]; then
+    echo "**🖥️ $(TS) - Output (ringkas)**" >> "$LOG"
+    echo '```text' >> "$LOG"
     echo "$OUT" | head -n 10 >> "$LOG"
     [ "$(echo "$OUT" | wc -l)" -gt 10 ] && echo "(output dipotong)" >> "$LOG"
+    echo '```' >> "$LOG"
   fi
-  echo '```' >> "$LOG"
 
-  echo '```text' >> "$LOG"
-  if [ "$RC" -eq 0 ]; then
-    echo "exit code: $RC ✅" >> "$LOG"
-  else
+  # Tampilkan exit code hanya jika RC != 0
+  if [ "$RC" -ne 0 ]; then
+    echo '```text' >> "$LOG"
     echo "exit code: $RC ❌" >> "$LOG"
+    echo '```' >> "$LOG"
   fi
-  echo '```' >> "$LOG"
 }
 
 result() {
@@ -148,11 +150,11 @@ result() {
 
   case "$choice" in
     1)
-      echo "**Status:** SUCCESS - $(TS)" >> "$LOG"
+      echo "**$(TS) - Status:** SUCCESS" >> "$LOG"
       ;;
     2)
       read -p "Analysis: " msg
-      echo "**Analysis:** $msg - $(TS)" >> "$LOG"
+      echo "**$(TS) - Analysis:** $msg" >> "$LOG"
       ;;
     *)
       echo "Input ngawur. Pilih 1 atau 2."
@@ -163,6 +165,40 @@ result() {
 
 tags() {
   echo "---" >> "$LOG"
-  echo "**🏷️ Tags:** $* - $(TS)" >> "$LOG"
+  echo "**🏷️ $(TS) - Tags:** $*" >> "$LOG"
   echo "---" >> "$LOG"
+}
+
+command-usage() {
+  cat >> "$LOG" <<HTML
+<div style="background-color:#1e1e1e; color:#ffffff; padding:10px; border-radius:12px; max-width:700px; margin:auto; font-family:monospace; line-height:1.5; box-shadow:0 4px 12px rgba(0,0,0,0.5);">
+  <h3 style="padding:5px; margin:0;color:#569cd6; text-align:center; margin-bottom:15px;">Command Usage</h3>
+  <div style="background-color:#2d2d2d; color:#dcdcaa; border-radius:8px; font-size:16px; white-space:pre-wrap; padding:10px;">
+HTML
+
+  # masukkan setiap baris $* ke box
+  while IFS= read -r line; do
+    echo "    $line" >> "$LOG"
+  done <<< "$*"
+
+  cat >> "$LOG" <<HTML
+  </div>
+</div>
+HTML
+  echo -e "\n" >> "$LOG"
+}
+
+add_markdown_link() {
+    echo "Masukkan NAMA link (contoh: LATIHAN NAVIGASI FILESYSTEM):"
+    read -r LINK_NAME
+
+    echo "Masukkan PATH tujuan (contoh: 01-filesystem/commad-dasar/navigasi.md):"
+    read -r LINK_PATH
+
+    MARKDOWN_LINK="👉 **[📂 ${LINK_NAME}](${LINK_PATH})**"
+
+    echo "" >> "$LOG"
+    echo "$MARKDOWN_LINK" >> "$LOG"
+
+    echo "✔ Link berhasil ditambahkan ke $LOG"
 }
