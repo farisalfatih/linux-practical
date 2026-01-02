@@ -1,4 +1,4 @@
-LOG="/home/faris-al-fatih/linux-practical/LEARNLOG.md"
+LOG="/home/faris-al-fatih/linux-practical/logs/01-filesystem/commad-dasar/explorasi.md"
 
 TS() {
   date '+%Y-%m-%d %H:%M:%S'
