@@ -1,89 +1,124 @@
 #!/bin/bash
-# Learning Log System - Simplified for Practice
+# =========================================================
+# Learning Log System — Strict Mode (LOG wajib diset dulu)
+# =========================================================
 
-# Configuration - Ubah ini sesuai topik yang sedang dipelajari
-LOG="/home/faris-al-fatih/linux-practical/logs/01-filesystem/commad-dasar/explorasi.md"
+# ---------------------------------------------------------
+# Configuration
+# ---------------------------------------------------------
+LOG=""
 
-# Utility functions
+# ---------------------------------------------------------
+# Guard: wajib set LOG
+# ---------------------------------------------------------
+require_log() {
+  if [[ -z "$LOG" ]]; then
+    echo "❌ ERROR: LOG belum diset."
+    echo "➡️  Jalankan terlebih dahulu:"
+    echo "    set_log /path/ke/file.log"
+    echo ""
+    echo "Contoh:"
+    echo "    set_log \$HOME/learnlog/filesystem/day1.md"
+    return 1
+  fi
+}
+
+# ---------------------------------------------------------
+# Utility
+# ---------------------------------------------------------
 TS() {
   date '+%Y-%m-%d %H:%M:%S'
 }
 
-# Header functions
-h1() { echo -e "\n# $(TS) - $*" >> "$LOG"; }
-h2() { echo -e "\n## $(TS) - $*" >> "$LOG"; }
-h3() { echo -e "\n### $(TS) - $*" >> "$LOG"; }
+# ---------------------------------------------------------
+# Header helpers
+# ---------------------------------------------------------
+h1() { require_log || return 1; echo -e "\n# $(TS) - $*" >> "$LOG"; }
+h2() { require_log || return 1; echo -e "\n## $(TS) - $*" >> "$LOG"; }
+h3() { require_log || return 1; echo -e "\n### $(TS) - $*" >> "$LOG"; }
 
-# Start new exercise/case
+# ---------------------------------------------------------
+# Exercise lifecycle
+# ---------------------------------------------------------
 exercise() {
+  require_log || return 1
   echo -e "\n---\n" >> "$LOG"
   echo "## 📚 $(TS) - Exercise: $*" >> "$LOG"
   echo "" >> "$LOG"
 }
 
-# Define objective
 objective() {
+  require_log || return 1
   echo "**🎯 Objective:** $*" >> "$LOG"
   echo "" >> "$LOG"
 }
 
-# Quick notes (simple bullets)
 note() {
+  require_log || return 1
   echo "- 📝 $*" >> "$LOG"
 }
 
+# ---------------------------------------------------------
 # Run command and capture output
+# ---------------------------------------------------------
 run() {
+  require_log || return 1
+
   echo "**💻 Command:**" >> "$LOG"
   echo '```bash' >> "$LOG"
   echo "$*" >> "$LOG"
   echo '```' >> "$LOG"
-  
   echo "" >> "$LOG"
+
   echo "**🖥️ Output:**" >> "$LOG"
   echo '```' >> "$LOG"
-  
-  # Execute and capture (show in terminal + save to file)
+
   local OUTPUT
   OUTPUT=$("$@" 2>&1)
   local RC=$?
-  
-  # Show output in terminal
+
+  # tampil di terminal
   echo "$OUTPUT"
-  
-  # Save to log (limit to 50 lines for efficiency)
+
+  # simpan ke log (maks 50 baris)
   if [[ -n "$OUTPUT" ]]; then
     echo "$OUTPUT" | head -n 50 >> "$LOG"
-    local LINE_COUNT=$(echo "$OUTPUT" | wc -l)
+    local LINE_COUNT
+    LINE_COUNT=$(echo "$OUTPUT" | wc -l)
     [[ $LINE_COUNT -gt 50 ]] && echo "... (${LINE_COUNT} lines, showing first 50)" >> "$LOG"
   fi
-  
+
   echo '```' >> "$LOG"
-  
-  # Show exit code
+
   if [[ $RC -eq 0 ]]; then
     echo "✅ Exit code: 0" >> "$LOG"
   else
     echo "❌ Exit code: $RC" >> "$LOG"
   fi
   echo "" >> "$LOG"
-  
+
   return $RC
 }
 
-# Code solution/snippet
+# ---------------------------------------------------------
+# Code solution
+# ---------------------------------------------------------
 solution() {
+  require_log || return 1
   echo "**💡 Solution:**" >> "$LOG"
   echo '```bash' >> "$LOG"
-  cat >> "$LOG"  # Read from stdin until Ctrl+D
+  cat >> "$LOG"
   echo '```' >> "$LOG"
   echo "" >> "$LOG"
 }
 
-# Learning points
+# ---------------------------------------------------------
+# Learning reflection
+# ---------------------------------------------------------
 learned() {
+  require_log || return 1
   echo "**✨ What I learned:**" >> "$LOG"
-  echo "Masukkan poin-poin pembelajaran (tekan ENTER kosong untuk selesai):"
+  echo "Masukkan poin (ENTER kosong untuk selesai):"
   while IFS= read -r line; do
     [[ -z "$line" ]] && break
     echo "- $line" >> "$LOG"
@@ -91,92 +126,106 @@ learned() {
   echo "" >> "$LOG"
 }
 
-# Mark as completed
+# ---------------------------------------------------------
+# Status
+# ---------------------------------------------------------
 complete() {
+  require_log || return 1
   echo "**✅ $(TS) - Status:** COMPLETED" >> "$LOG"
   echo "" >> "$LOG"
 }
 
-# Mark as failed with reason
 failed() {
+  require_log || return 1
   echo "**❌ $(TS) - Status:** FAILED" >> "$LOG"
   [[ -n "$*" ]] && echo "**Reason:** $*" >> "$LOG"
   echo "" >> "$LOG"
 }
 
-# Quick reference link
+# ---------------------------------------------------------
+# Reference
+# ---------------------------------------------------------
 ref() {
+  require_log || return 1
   echo "📖 **Reference:** $*" >> "$LOG"
   echo "" >> "$LOG"
 }
 
-# Session summary
+# ---------------------------------------------------------
+# Summary
+# ---------------------------------------------------------
 summary() {
+  require_log || return 1
+
   echo -e "\n---\n" >> "$LOG"
   echo "## 📊 $(TS) - Session Summary" >> "$LOG"
   echo "" >> "$LOG"
-  
-  # Check if log file exists
-  [[ ! -f "$LOG" ]] && { echo "Log file not found"; return 1; }
-  
-  # Count exercises (single pass for efficiency)
+
   local TOTAL=0 COMPLETED=0 FAILED=0
-  
+
   while IFS= read -r line; do
     [[ "$line" =~ ^##\ 📚 ]] && ((TOTAL++))
-    [[ "$line" =~ ✅.*COMPLETED ]] && ((COMPLETED++))
-    [[ "$line" =~ ❌.*FAILED ]] && ((FAILED++))
+    [[ "$line" =~ COMPLETED ]] && ((COMPLETED++))
+    [[ "$line" =~ FAILED ]] && ((FAILED++))
   done < "$LOG"
-  
+
   echo "- **Total exercises:** $TOTAL" >> "$LOG"
   echo "- **Completed:** $COMPLETED" >> "$LOG"
   echo "- **Failed:** $FAILED" >> "$LOG"
   echo "" >> "$LOG"
-  
-  # Show summary in terminal too
-  echo "📊 Session Summary: $COMPLETED/$TOTAL completed, $FAILED failed"
+
+  echo "📊 Summary: $COMPLETED/$TOTAL completed, $FAILED failed"
 }
 
-# Help/Usage
-usage() {
-  cat <<EOF
-📝 Learning Log Functions:
-
-Structure:
-  exercise "title"       - Start new exercise
-  objective "goal"       - Set exercise goal
-  
-Execution:
-  run "command"          - Run command and log output
-  note "text"            - Quick note
-  
-Code:
-  solution << 'EOF'      - Add multi-line code solution
-  ... code ...
-  EOF
-  
-Results:
-  learned                - What you learned (interactive)
-  complete               - Mark as completed
-  failed "reason"        - Mark as failed
-  
-Organization:
-  h1/h2/h3 "heading"     - Headers
-  ref "link/note"        - Reference
-  summary                - End session summary
-
-Current log: $LOG
-EOF
-}
-
-# Initialize log file if needed
+# ---------------------------------------------------------
+# Log initialization
+# ---------------------------------------------------------
 init_log() {
   local LOG_FILE="$1"
-  if [[ ! -f "$LOG_FILE" ]]; then
-    mkdir -p "$(dirname "$LOG_FILE")"
-    echo "# Learning Log: $(basename "$(dirname "$LOG_FILE")")" > "$LOG_FILE"
-    echo "" >> "$LOG_FILE"
-    echo "Started: $(date '+%Y-%m-%d')" >> "$LOG_FILE"
-    echo "" >> "$LOG_FILE"
+  mkdir -p "$(dirname "$LOG_FILE")"
+  echo "# Learning Log" > "$LOG_FILE"
+  echo "" >> "$LOG_FILE"
+  echo "Started: $(date '+%Y-%m-%d')" >> "$LOG_FILE"
+  echo "" >> "$LOG_FILE"
+}
+
+# ---------------------------------------------------------
+# Set log (WAJIB)
+# ---------------------------------------------------------
+set_log() {
+  if [[ -z "$1" ]]; then
+    echo "❌ Error: Masukkan path file log"
+    return 1
   fi
+
+  LOG="$1"
+  [[ ! -f "$LOG" ]] && init_log "$LOG"
+  echo "✅ LOG aktif: $LOG"
+}
+
+# ---------------------------------------------------------
+# Help
+# ---------------------------------------------------------
+usage() {
+  cat <<EOF
+📝 Learning Log System (STRICT)
+
+WAJIB:
+  set_log /path/ke/file.log
+
+Contoh:
+  set_log \$HOME/learnlog/filesystem/day1.md
+
+Fungsi utama:
+  exercise "judul"
+  objective "tujuan"
+  run ls -la
+  note "catatan"
+  learned
+  complete | failed "alasan"
+  summary
+
+LOG aktif:
+  $LOG
+EOF
 }
