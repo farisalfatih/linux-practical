@@ -168,3 +168,15 @@ Organization:
 Current log: $LOG
 EOF
 }
+
+# Initialize log file if needed
+init_log() {
+  local LOG_FILE="$1"
+  if [[ ! -f "$LOG_FILE" ]]; then
+    mkdir -p "$(dirname "$LOG_FILE")"
+    echo "# Learning Log: $(basename "$(dirname "$LOG_FILE")")" > "$LOG_FILE"
+    echo "" >> "$LOG_FILE"
+    echo "Started: $(date '+%Y-%m-%d')" >> "$LOG_FILE"
+    echo "" >> "$LOG_FILE"
+  fi
+}
