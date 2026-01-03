@@ -1,204 +1,170 @@
+#!/bin/bash
+# Learning Log System - Simplified for Practice
+
+# Configuration - Ubah ini sesuai topik yang sedang dipelajari
 LOG="/home/faris-al-fatih/linux-practical/logs/01-filesystem/commad-dasar/explorasi.md"
 
+# Utility functions
 TS() {
   date '+%Y-%m-%d %H:%M:%S'
 }
 
-h1() { echo "# $(TS) - $1" >> "$LOG"; }
-h2() { echo "## $(TS) - $1" >> "$LOG"; }
-h3() { echo "### $(TS) - $1" >> "$LOG"; }
-h4() { echo "#### $(TS) - $1" >> "$LOG"; }
+# Header functions
+h1() { echo -e "\n# $(TS) - $*" >> "$LOG"; }
+h2() { echo -e "\n## $(TS) - $*" >> "$LOG"; }
+h3() { echo -e "\n### $(TS) - $*" >> "$LOG"; }
 
-create_table() {
-    read -p "Jumlah kolom: " col_count
-    headers=()
-    for (( i=1; i<=col_count; i++ )); do
-        read -p "Header kolom ke-$i: " h
-        headers+=("$h")
-    done
-
-    echo ""
-    echo "Masukkan baris data (pisahkan kolom dengan |). Tekan ENTER kosong untuk selesai."
-    rows=()
-    while true; do
-        read -p "> " line
-        [[ -z "$line" ]] && break
-        rows+=("$line")
-    done
-
-    # Hitung panjang tiap kolom (maks dari header & semua baris)
-    col_widths=()
-    for i in "${!headers[@]}"; do
-        col_widths[i]=${#headers[i]}
-    done
-    for row in "${rows[@]}"; do
-        IFS='|' read -ra cols <<< "$row"
-        for i in "${!cols[@]}"; do
-            if [ ${#cols[i]} -gt ${col_widths[i]} ]; then
-                col_widths[i]=${#cols[i]}
-            fi
-        done
-    done
-
-    # Buat header & separator
-    header_line="|"
-    sep_line="|"
-    for i in "${!headers[@]}"; do
-        printf -v padded "%-${col_widths[i]}s" "${headers[i]}"
-        header_line+="$padded|"
-        dashes=$(printf '%*s' "${col_widths[i]}" '' | tr ' ' '-')
-        sep_line+="$dashes|"
-    done
-
-    # Tulis ke file
-    echo "$header_line" >> "$LOG"
-    echo "$sep_line" >> "$LOG"
-    for row in "${rows[@]}"; do
-        IFS='|' read -ra cols <<< "$row"
-        line_out="|"
-        for i in "${!cols[@]}"; do
-            printf -v padded "%-${col_widths[i]}s" "${cols[i]}"
-            line_out+="$padded|"
-        done
-        echo "$line_out" >> "$LOG"
-    done
-
-    echo "Tabel berhasil ditambahkan ke $LOG"
-}
-
-notes() {
+# Start new exercise/case
+exercise() {
+  echo -e "\n---\n" >> "$LOG"
+  echo "## 📚 $(TS) - Exercise: $*" >> "$LOG"
   echo "" >> "$LOG"
-  echo "**📝 $(TS) - Notes**" >> "$LOG"
-
-  echo "Masukkan notes (bullet). Tekan ENTER kosong untuk selesai."
-  while true; do
-    read -p "> " item
-    [[ -z "$item" ]] && break   
-    echo "- $item" >> "$LOG"
-  done
 }
 
-flows() {
-  echo "" >> "$LOG"
-  echo "**🔄 $(TS) - Flows**" >> "$LOG"
-
-  echo "Masukkan langkah satu per satu. Ketik ':end' untuk selesai."
-  count=1
-  while true; do
-    read -p "$count> " step
-    [[ "$step" == ":end" ]] && break
-    echo "$count. $step" >> "$LOG"
-    ((count++))
-  done
-}
-
+# Define objective
 objective() {
-  echo "**🎯 $(TS) - Objective:** $*" >> "$LOG"
+  echo "**🎯 Objective:** $*" >> "$LOG"
+  echo "" >> "$LOG"
 }
 
-context() {
-  echo "**📋 $(TS) - Context**" >> "$LOG"
-  echo "- User: $(whoami)" >> "$LOG"
-  echo "- Dir: $(pwd)" >> "$LOG"
-  echo "- Shell: $SHELL" >> "$LOG"
-  echo "- Tree:" >> "$LOG"
-  echo '```text' >> "$LOG"
-  tree >> "$LOG"
-  echo '```' >> "$LOG"
+# Quick notes (simple bullets)
+note() {
+  echo "- 📝 $*" >> "$LOG"
 }
 
-expected() {
-  echo "**📌 $(TS) - Expected:** $*" >> "$LOG"
-}
-
-
-# Commend complex gunakan: run bash -c
+# Run command and capture output
 run() {
-  echo "**💻 $(TS) - Command**" >> "$LOG"
+  echo "**💻 Command:**" >> "$LOG"
   echo '```bash' >> "$LOG"
-  printf '%q ' "$@" >> "$LOG"
-  echo >> "$LOG"
+  echo "$*" >> "$LOG"
   echo '```' >> "$LOG"
-
-  OUT=$("$@" 2>&1)
-  RC=$?
-
-  # Tampilkan output hanya jika ada
-  if [ -n "$OUT" ]; then
-    echo "**🖥️ $(TS) - Output (ringkas)**" >> "$LOG"
-    echo '```text' >> "$LOG"
-    echo "$OUT" | head -n 10 >> "$LOG"
-    [ "$(echo "$OUT" | wc -l)" -gt 10 ] && echo "(output dipotong)" >> "$LOG"
-    echo '```' >> "$LOG"
+  
+  echo "" >> "$LOG"
+  echo "**🖥️ Output:**" >> "$LOG"
+  echo '```' >> "$LOG"
+  
+  # Execute and capture (show in terminal + save to file)
+  local OUTPUT
+  OUTPUT=$("$@" 2>&1)
+  local RC=$?
+  
+  # Show output in terminal
+  echo "$OUTPUT"
+  
+  # Save to log (limit to 50 lines for efficiency)
+  if [[ -n "$OUTPUT" ]]; then
+    echo "$OUTPUT" | head -n 50 >> "$LOG"
+    local LINE_COUNT=$(echo "$OUTPUT" | wc -l)
+    [[ $LINE_COUNT -gt 50 ]] && echo "... (${LINE_COUNT} lines, showing first 50)" >> "$LOG"
   fi
-
-  # Tampilkan exit code hanya jika RC != 0
-  if [ "$RC" -ne 0 ]; then
-    echo '```text' >> "$LOG"
-    echo "exit code: $RC ❌" >> "$LOG"
-    echo '```' >> "$LOG"
+  
+  echo '```' >> "$LOG"
+  
+  # Show exit code
+  if [[ $RC -eq 0 ]]; then
+    echo "✅ Exit code: 0" >> "$LOG"
+  else
+    echo "❌ Exit code: $RC" >> "$LOG"
   fi
+  echo "" >> "$LOG"
+  
+  return $RC
 }
 
-result() {
-  local choice
-
-  echo "Pilih hasil eksekusi:"
-  echo "1) SUCCESS (tanpa analisis)"
-  echo "2) FAILURE (tulis analysis)"
-  read -p "> " choice
-
-  case "$choice" in
-    1)
-      echo "**$(TS) - Status:** SUCCESS" >> "$LOG"
-      ;;
-    2)
-      read -p "Analysis: " msg
-      echo "**$(TS) - Analysis:** $msg" >> "$LOG"
-      ;;
-    *)
-      echo "Input ngawur. Pilih 1 atau 2."
-      return 1
-      ;;
-  esac
+# Code solution/snippet
+solution() {
+  echo "**💡 Solution:**" >> "$LOG"
+  echo '```bash' >> "$LOG"
+  cat >> "$LOG"  # Read from stdin until Ctrl+D
+  echo '```' >> "$LOG"
+  echo "" >> "$LOG"
 }
 
-tags() {
-  echo "---" >> "$LOG"
-  echo "**🏷️ $(TS) - Tags:** $*" >> "$LOG"
-  echo "---" >> "$LOG"
-}
-
-command-usage() {
-  cat >> "$LOG" <<HTML
-<div style="background-color:#1e1e1e; color:#ffffff; padding:10px; border-radius:12px; max-width:700px; margin:auto; font-family:monospace; line-height:1.5; box-shadow:0 4px 12px rgba(0,0,0,0.5);">
-  <h3 style="padding:5px; margin:0;color:#569cd6; text-align:center; margin-bottom:15px;">Command Usage</h3>
-  <div style="background-color:#2d2d2d; color:#dcdcaa; border-radius:8px; font-size:16px; white-space:pre-wrap; padding:10px;">
-HTML
-
-  # masukkan setiap baris $* ke box
+# Learning points
+learned() {
+  echo "**✨ What I learned:**" >> "$LOG"
+  echo "Masukkan poin-poin pembelajaran (tekan ENTER kosong untuk selesai):"
   while IFS= read -r line; do
-    echo "    $line" >> "$LOG"
-  done <<< "$*"
-
-  cat >> "$LOG" <<HTML
-  </div>
-</div>
-HTML
-  echo -e "\n" >> "$LOG"
+    [[ -z "$line" ]] && break
+    echo "- $line" >> "$LOG"
+  done
+  echo "" >> "$LOG"
 }
 
-add_markdown_link() {
-    echo "Masukkan NAMA link (contoh: LATIHAN NAVIGASI FILESYSTEM):"
-    read -r LINK_NAME
+# Mark as completed
+complete() {
+  echo "**✅ $(TS) - Status:** COMPLETED" >> "$LOG"
+  echo "" >> "$LOG"
+}
 
-    echo "Masukkan PATH tujuan (contoh: 01-filesystem/commad-dasar/navigasi.md):"
-    read -r LINK_PATH
+# Mark as failed with reason
+failed() {
+  echo "**❌ $(TS) - Status:** FAILED" >> "$LOG"
+  [[ -n "$*" ]] && echo "**Reason:** $*" >> "$LOG"
+  echo "" >> "$LOG"
+}
 
-    MARKDOWN_LINK="👉 **[📂 ${LINK_NAME}](${LINK_PATH})**"
+# Quick reference link
+ref() {
+  echo "📖 **Reference:** $*" >> "$LOG"
+  echo "" >> "$LOG"
+}
 
-    echo "" >> "$LOG"
-    echo "$MARKDOWN_LINK" >> "$LOG"
+# Session summary
+summary() {
+  echo -e "\n---\n" >> "$LOG"
+  echo "## 📊 $(TS) - Session Summary" >> "$LOG"
+  echo "" >> "$LOG"
+  
+  # Check if log file exists
+  [[ ! -f "$LOG" ]] && { echo "Log file not found"; return 1; }
+  
+  # Count exercises (single pass for efficiency)
+  local TOTAL=0 COMPLETED=0 FAILED=0
+  
+  while IFS= read -r line; do
+    [[ "$line" =~ ^##\ 📚 ]] && ((TOTAL++))
+    [[ "$line" =~ ✅.*COMPLETED ]] && ((COMPLETED++))
+    [[ "$line" =~ ❌.*FAILED ]] && ((FAILED++))
+  done < "$LOG"
+  
+  echo "- **Total exercises:** $TOTAL" >> "$LOG"
+  echo "- **Completed:** $COMPLETED" >> "$LOG"
+  echo "- **Failed:** $FAILED" >> "$LOG"
+  echo "" >> "$LOG"
+  
+  # Show summary in terminal too
+  echo "📊 Session Summary: $COMPLETED/$TOTAL completed, $FAILED failed"
+}
 
-    echo "✔ Link berhasil ditambahkan ke $LOG"
+# Help/Usage
+usage() {
+  cat <<EOF
+📝 Learning Log Functions:
+
+Structure:
+  exercise "title"       - Start new exercise
+  objective "goal"       - Set exercise goal
+  
+Execution:
+  run "command"          - Run command and log output
+  note "text"            - Quick note
+  
+Code:
+  solution << 'EOF'      - Add multi-line code solution
+  ... code ...
+  EOF
+  
+Results:
+  learned                - What you learned (interactive)
+  complete               - Mark as completed
+  failed "reason"        - Mark as failed
+  
+Organization:
+  h1/h2/h3 "heading"     - Headers
+  ref "link/note"        - Reference
+  summary                - End session summary
+
+Current log: $LOG
+EOF
 }
