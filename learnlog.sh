@@ -216,16 +216,56 @@ WAJIB:
 Contoh:
   set_log \$HOME/learnlog/filesystem/day1.md
 
-Fungsi utama:
-  exercise "judul"
-  objective "tujuan"
-  run ls -la
-  note "catatan"
+Alur yang DISARANKAN:
+  exercise "judul exercise"
+  context_dir
+  objective "tujuan pembelajaran"
+  run <command>
+  note "catatan tambahan"
   learned
   complete | failed "alasan"
   summary
 
+Fungsi utama:
+  exercise   "judul exercise"
+  context_dir        # menjelaskan direktori kerja (pwd), TANPA cd
+  objective  "tujuan"
+  run        <command>
+  note       "catatan singkat"
+  learned
+  complete
+  failed     "alasan"
+  ref        "referensi"
+  summary
+
+Catatan penting:
+- Sistem TIDAK menjalankan cd secara otomatis
+- Semua command dieksekusi di working directory aktif
+- Konteks direktori HARUS dicatat manual dengan context_dir
+
 LOG aktif:
   $LOG
 EOF
+}
+
+# ---------------------------------------------------------
+# Context: Working Directory Explanation
+# ---------------------------------------------------------
+context_dir() {
+  require_log || return 1
+
+  local DIR
+  DIR="$(pwd)"
+
+  echo "**📂 Context:**" >> "$LOG"
+  echo "" >> "$LOG"
+  echo "- Skenario ini dijalankan pada direktori:" >> "$LOG"
+  echo "  \`\`\`" >> "$LOG"
+  echo "  $DIR" >> "$LOG"
+  echo "  \`\`\`" >> "$LOG"
+  echo "- Catatan:" >> "$LOG"
+  echo "  - Tidak ada perintah \`cd\` yang dijalankan." >> "$LOG"
+  echo "  - Semua command menggunakan working directory aktif saat ini." >> "$LOG"
+  echo "  - Perubahan direktori **tidak otomatis tercatat** kecuali kamu eksplisit menjalankan \`cd\`." >> "$LOG"
+  echo "" >> "$LOG"
 }
