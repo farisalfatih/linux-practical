@@ -129,7 +129,7 @@ learned() {
 # ---------------------------------------------------------
 # Status
 # ---------------------------------------------------------
-completed() {
+log_completed() {
   require_log || return 1
   echo "**✅ $(TS) - Status:** COMPLETED" >> "$LOG"
   echo "" >> "$LOG"
