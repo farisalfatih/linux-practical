@@ -36,6 +36,9 @@ TS() {
 h1() { require_log || return 1; echo -e "\n# $(TS) - $*" >> "$LOG"; }
 h2() { require_log || return 1; echo -e "\n## $(TS) - $*" >> "$LOG"; }
 h3() { require_log || return 1; echo -e "\n### $(TS) - $*" >> "$LOG"; }
+h4() { require_log || return 1; echo -e "\n#### $(TS) - $*" >> "$LOG"; }
+h5() { require_log || return 1; echo -e "\n##### $(TS) - $*" >> "$LOG"; }
+
 
 # ---------------------------------------------------------
 # Exercise lifecycle
