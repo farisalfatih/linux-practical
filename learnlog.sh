@@ -137,7 +137,7 @@ completed() {
   echo "**✅ $(TS) - Status:** COMPLETED" >> "$LOG"
   echo "" >> "$LOG"
 }
-z
+
 failed() {
   require_log || return 1
   echo "**❌ $(TS) - Status:** FAILED" >> "$LOG"
