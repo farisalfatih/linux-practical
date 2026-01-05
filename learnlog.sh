@@ -129,7 +129,7 @@ learned() {
 # ---------------------------------------------------------
 # Status
 # ---------------------------------------------------------
-complete() {
+completed() {
   require_log || return 1
   echo "**✅ $(TS) - Status:** COMPLETED" >> "$LOG"
   echo "" >> "$LOG"
@@ -233,7 +233,7 @@ Fungsi utama:
   run        <command>
   note       "catatan singkat"
   learned
-  complete
+  completed
   failed     "alasan"
   ref        "referensi"
   summary
