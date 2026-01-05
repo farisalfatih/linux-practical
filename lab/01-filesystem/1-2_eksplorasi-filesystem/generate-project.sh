@@ -5,7 +5,7 @@
 
 set -euo pipefail
 
-BASE_DIR="${BASE_DIR:-$HOME/linux-practical/lab/01-filesystem/chaos-data-lake}"
+BASE_DIR="${BASE_DIR:-$HOMElab/01-filesystem/1-2_eksplorasi-filesystem/chaos-data-lake}"
 MODE="${1:-minimal}"
 LOG_FILE="/tmp/chaos-data-lake-generator.log"
 
