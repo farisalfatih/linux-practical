@@ -224,9 +224,9 @@ tree [OPTION]... [DIRECTORY]...
 
 **Use case data engineering:** Dokumentasi struktur data lake, onboarding tim baru, validasi struktur setelah deployment.
 
----
-### [TASK LATIHAN LS DAN TREE](/home/faris-al-fatih/linux-practical/log/01-file-system/1-2_eksplorasi-filesystem/task-ls-tree.md)
-### [KERJAKAN TASK LATIHAN LS DAN TREE](/home/faris-al-fatih/linux-practical/log/01-file-system/1-2_eksplorasi-filesystem/action-ls-tree.md)
+### [LATIHAN DASAR ESKPLORASI](/log/01-file-system/1-2_eksplorasi-filesystem/latihan-dasar.md)
+### [TASK LATIHAN LS DAN TREE](/log/01-file-system/1-2_eksplorasi-filesystem/task-ls-tree.md)
+### [KERJAKAN TASK LATIHAN LS DAN TREE](/log/01-file-system/1-2_eksplorasi-filesystem/action-ls-tree.md)
 ---
 
 ## 1.3 Membaca isi file
