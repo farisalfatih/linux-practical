@@ -175,6 +175,8 @@ cd [DIRECTORY]
 **Best practice:** Gunakan absolute path dalam production pipeline untuk konsistensi.
 
 ---
+# [LOG LATIHAN PATH DAN LOKASI](log/01-file-system/materi/1_1-path-dan-lokasi.md)
+---
 
 ## 1.2 Eksplorasi filesystem
 
