@@ -6,7 +6,7 @@
 # ---------------------------------------------------------
 # Configuration
 # ---------------------------------------------------------
-LOG=""
+[[ "${BASH_SOURCE[0]}" != "${0}" ]] && __SAFE_LOG_SOURCED=1 || __SAFE_LOG_SOURCED=0
 
 # ---------------------------------------------------------
 # Guard: wajib set LOG
@@ -129,12 +129,12 @@ learned() {
 # ---------------------------------------------------------
 # Status
 # ---------------------------------------------------------
-log_completed() {
+completed() {
   require_log || return 1
   echo "**✅ $(TS) - Status:** COMPLETED" >> "$LOG"
   echo "" >> "$LOG"
 }
-
+z
 failed() {
   require_log || return 1
   echo "**❌ $(TS) - Status:** FAILED" >> "$LOG"
