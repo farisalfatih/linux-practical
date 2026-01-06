@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # ============================================
-# CRYPTO DATA ENGINEERING LAB — PROJECT GENERATOR
-# Fokus: latihan membaca file (cat, head, tail, less, more)
-# TANPA logika latihan, TANPA ETL, TANPA sok pintar
+# CRYPTO DATA ENGINEERING LAB — PROJECT GENERATOR (REVAMP)
+# Fokus: latihan cat, head, tail, less, more
+# Data dibuat cukup BESAR agar relevan
 # ============================================
 
 set -euo pipefail
@@ -16,54 +16,59 @@ mkdir -p \
   "$BASE_DIR/data/logs" \
   "$BASE_DIR/docs"
 
-# -------- RAW DATA (SIMULASI YAHOO FINANCE BATCH) --------
-cat <<'EOF' > "$BASE_DIR/data/raw/btc_usd.csv"
-date,open,high,low,close,volume
-2024-01-01,42000,43000,41800,42500,12345
+# -------- FUNCTION: GENERATE CSV --------
+generate_crypto_csv () {
+  local file="$1"
+  local start_price="$2"
 
-2024-01-02,42500,44000,42000,43800,18200
-2024-01-03,43800,45000,43500,44800,21000
-EOF
+  echo "date,open,high,low,close,volume" > "$file"
 
-cat <<'EOF' > "$BASE_DIR/data/raw/eth_usd.csv"
-date,open,high,low,close,volume
-2024-01-01,2200,2250,2150,2230,33000
-2024-01-02,2230,2300,2200,2280,41000
-EOF
+  for i in $(seq 1 300); do
+    day=$(printf "2024-01-%02d" $(( (i-1)%28 + 1 )))
+    open=$((start_price + RANDOM % 500))
+    high=$((open + RANDOM % 300))
+    low=$((open - RANDOM % 300))
+    close=$((low + RANDOM % (high-low+1)))
+    volume=$((RANDOM % 90000 + 1000))
 
-cat <<'EOF' > "$BASE_DIR/data/raw/sol_usd.csv"
-date,open,high,low,close,volume
-2024-01-01,95,102,93,100,88000
-EOF
+    echo "$day,$open,$high,$low,$close,$volume" >> "$file"
 
-# -------- STAGING DATA (DUMMY HASIL PIPELINE) --------
-cat <<'EOF' > "$BASE_DIR/data/staging/merged_crypto.csv"
-asset,date,open,high,low,close,volume
-BTC,2024-01-01,42000,43000,41800,42500,12345
-BTC,2024-01-02,42500,44000,42000,43800,18200
-ETH,2024-01-01,2200,2250,2150,2230,33000
-SOL,2024-01-01,95,102,93,100,88000
-EOF
+    # sengaja sisipkan baris kosong (buat latihan cat -b / -s)
+    if (( i % 77 == 0 )); then
+      echo "" >> "$file"
+    fi
+  done
+}
 
-# -------- LOG FILES (TARGET tail / less +F) --------
-cat <<'EOF' > "$BASE_DIR/data/logs/ingest.log"
-[INFO] 2024-01-01 10:00:01 start ingestion
-[INFO] reading btc_usd.csv
-[INFO] reading eth_usd.csv
+# -------- RAW DATA (300 BARIS / FILE) --------
+generate_crypto_csv "$BASE_DIR/data/raw/btc_usd.csv" 42000
+generate_crypto_csv "$BASE_DIR/data/raw/eth_usd.csv" 2200
+generate_crypto_csv "$BASE_DIR/data/raw/sol_usd.csv" 95
 
-[WARN] empty line detected
-[INFO] ingestion finished
-EOF
+# -------- STAGING DATA (GABUNGAN ~900 BARIS) --------
+echo "asset,date,open,high,low,close,volume" > "$BASE_DIR/data/staging/merged_crypto.csv"
 
-cat <<'EOF' > "$BASE_DIR/data/logs/pipeline.log"
-[PIPELINE] init
-[PIPELINE] extract
-[PIPELINE] transform
-[PIPELINE] load
-[PIPELINE] done
-EOF
+tail -n +2 "$BASE_DIR/data/raw/btc_usd.csv" | sed 's/^/BTC,/' >> "$BASE_DIR/data/staging/merged_crypto.csv"
+tail -n +2 "$BASE_DIR/data/raw/eth_usd.csv" | sed 's/^/ETH,/' >> "$BASE_DIR/data/staging/merged_crypto.csv"
+tail -n +2 "$BASE_DIR/data/raw/sol_usd.csv" | sed 's/^/SOL,/' >> "$BASE_DIR/data/staging/merged_crypto.csv"
 
-# -------- DOCS (TARGET cat -A, less, encoding debug) --------
+# -------- LOG FILES (REALISTIS BUAT tail / less +F) --------
+for i in $(seq 1 500); do
+  case $((RANDOM % 5)) in
+    0) level="INFO" ;;
+    1) level="INFO" ;;
+    2) level="WARN" ;;
+    3) level="INFO" ;;
+    4) level="ERROR" ;;
+  esac
+  echo "[$level] 2024-01-01 10:$i ingestion step $i" >> "$BASE_DIR/data/logs/ingest.log"
+done
+
+for i in $(seq 1 200); do
+  echo "[PIPELINE] step=$i status=ok" >> "$BASE_DIR/data/logs/pipeline.log"
+done
+
+# -------- DOCS (TARGET cat -A, hidden char) --------
 cat <<'EOF' > "$BASE_DIR/docs/schema.txt"
 TABLE: crypto_price
 
@@ -75,9 +80,11 @@ TABLE: crypto_price
 - close   : FLOAT
 - volume  : BIGINT
 
+
 NOTE:
 Delimiter is comma
 Hidden tab here -> 	
+Trailing space here ->     
 EOF
 
 # -------- README --------
@@ -85,16 +92,18 @@ cat <<'EOF' > "$BASE_DIR/README.md"
 Crypto Data Engineering Lab
 
 Tujuan:
-- Latihan membaca file
-- Debug data mentah
-- Inspect staging output
-- Monitor log pipeline
+- Latihan membaca file kecil vs besar
+- Bedakan kapan pakai cat, head, tail, less, more
+- Inspect data mentah, staging, dan log
 
-Command target:
-cat, head, tail, less, more
+Larangan:
+- Jangan bikin script tambahan
+- Jangan edit data
 
-JANGAN TAMBAH SCRIPT.
-LATIH COMMAND-NYA.
+Fokus:
+- command line skill
+- observasi, bukan coding
 EOF
 
-echo "Project generated: $BASE_DIR"
+echo "Project generated successfully at:"
+echo "$BASE_DIR"

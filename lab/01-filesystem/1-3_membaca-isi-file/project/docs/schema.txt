@@ -8,6 +8,8 @@ TABLE: crypto_price
 - close   : FLOAT
 - volume  : BIGINT
 
+
 NOTE:
 Delimiter is comma
 Hidden tab here -> 	
+Trailing space here ->     
