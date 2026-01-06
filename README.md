@@ -249,6 +249,23 @@ cat [OPTION]... [FILE]...
 
 **Use case data engineering:** Quick view file kecil, gabung multiple file CSV, debug isi file.
 
+#### TABEL LENGKAP OPSI `cat -A` UNTUK DEBUGGING DATA ENGINEERING
+
+| Karakter / Simbol | Representasi `cat -A` | Sumber Umum / Penyebab | Dampak di Data | Contoh Masalah |
+|------------------|----------------------|-----------------------|----------------|----------------|
+| Newline (LF) | `$` | Unix/Linux | Baris normal | Tidak ada |
+| Carriage Return (CR) | `^M` | Windows file (CRLF) | Parser CSV gagal, kolom geser | CSV dibuka di Linux tapi ada `^M` |
+| TAB | `^I` | Spreadsheet export, TSV | Kolom salah, parser salah | Delimiter tidak konsisten |
+| Space biasa | (spasi) | Manual input, copy paste | Bisa bikin field ekstra | Field “kosong” tapi ternyata ada spasi |
+| Non-breaking space | `M-BM-` / aneh | Copy HTML / PDF | Trim gagal | `"John Doe"` tidak sama dengan `"John Doe"` |
+| NUL | `^@` | File biner, dump SQL | Crash tool text, parser error | SQL dump korup |
+| BOM (Byte Order Mark) | `M-oM-;M-?` / aneh | Windows UTF-8 editor | Header kolom rusak, parser CSV error | Excel export CSV |
+| BEL | `^G` | File log lama / control char | Terminal bunyi beep | Log kontrol muncul di console |
+| Backspace | `^H` | Manual input / copy | Menghapus karakter tak terduga | Field “abc^Hdef” → jadi “adef” |
+| ESC | `^[` | ANSI escape, color | Parser tidak paham | Log berwarna nyasar ke CSV |
+| Carakter non-printable lain | `^?`, `^A`, dst | Encoding error / binary | Parser crash | File CSV dari sistem lama |
+| Replacement character | `�` | Encoding mismatch | Data korup | Copy paste dari web, encoding beda |
+
 ---
 
 ### head (lihat awal file)
