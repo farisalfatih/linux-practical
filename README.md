@@ -127,7 +127,7 @@
 **Konsep inti:** representasi data di disk & navigasi struktur
 
 ---
-
+log/01-file-system/1-4_manajemen-file-dan-directory
 ## 1.1 Path & lokasi
 
 ### pwd (print working directory)
@@ -476,6 +476,8 @@ ln [options] source link
 | `-n` | No dereference | Jangan follow symlink saat overwrite | Safe overwrite symlink ke directory |
 
 **Use case data engineering:** Alias "latest" data untuk consumer, zero-downtime deployment, shared config/reference data.
+
+[LOG LATIHAN MANAJEMEN FILE DAN DIRECTORY](log/01-file-system/1-4_manajemen-file-dan-directory/latihan-dasar.md)
 
 ---
 
