@@ -348,6 +348,8 @@ more [options] file ...
 
 **Note:** `less` lebih powerful, gunakan `more` hanya jika `less` tidak tersedia.
 
+[LOG LATIHAN MEMBACA ISI FILE](log/01-file-system/1-3_membaca-isi-file/latihan-dasar.md)
+
 ---
 
 ## 1.4 Manajemen file & directory
