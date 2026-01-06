@@ -1,0 +1,13 @@
+TABLE: crypto_price
+
+- asset   : STRING
+- date    : DATE
+- open    : FLOAT
+- high    : FLOAT
+- low     : FLOAT
+- close   : FLOAT
+- volume  : BIGINT
+
+NOTE:
+Delimiter is comma
+Hidden tab here -> 	

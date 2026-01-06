@@ -1,0 +1,6 @@
+[INFO] 2024-01-01 10:00:01 start ingestion
+[INFO] reading btc_usd.csv
+[INFO] reading eth_usd.csv
+
+[WARN] empty line detected
+[INFO] ingestion finished
