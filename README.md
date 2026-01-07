@@ -348,7 +348,7 @@ more [options] file ...
 
 **Note:** `less` lebih powerful, gunakan `more` hanya jika `less` tidak tersedia.
 
-[LOG LATIHAN MEMBACA ISI FILE](log/01-file-system/1-3_membaca-isi-file/latihan-dasar.md)
+### [LOG LATIHAN MEMBACA ISI FILE](log/01-file-system/1-3_membaca-isi-file/latihan-dasar.md)
 
 ---
 
@@ -477,7 +477,7 @@ ln [options] source link
 
 **Use case data engineering:** Alias "latest" data untuk consumer, zero-downtime deployment, shared config/reference data.
 
-[LOG LATIHAN MANAJEMEN FILE DAN DIRECTORY](log/01-file-system/1-4_manajemen-file-dan-directory/latihan-dasar.md)
+### [LOG LATIHAN MANAJEMEN FILE DAN DIRECTORY](log/01-file-system/1-4_manajemen-file-dan-directory/latihan-dasar.md)
 
 ---
 
@@ -499,6 +499,30 @@ file [options] file
 | `-z` | Compressed | Look inside compressed files | Inspect tanpa extract |
 | `-L` | Follow symlinks | Follow symbolic links | Cek tipe file target symlink |
 
+| Nama sehari-hari | `file` (tanpa opsi) | `file -i` (MIME) |
+|-----------------|---------------------|------------------|
+| File teks (.txt) | ASCII text | text/plain; charset=utf-8 |
+| CSV | ASCII text | text/csv; charset=utf-8 |
+| JSON | JSON text data | application/json |
+| XML | XML 1.0 document | application/xml |
+| Log file | ASCII text | text/plain; charset=utf-8 |
+| Shell script | Bourne-Again shell script | text/x-shellscript |
+| Python script | Python script | text/x-python |
+| Binary / executable | ELF 64-bit LSB executable | application/x-executable |
+| File kosong | empty | inode/x-empty |
+| ZIP | Zip archive data | application/zip |
+| GZIP | gzip compressed data | application/gzip |
+| TAR | POSIX tar archive | application/x-tar |
+| Parquet | Apache Parquet | application/octet-stream |
+| ORC | Apache ORC | application/octet-stream |
+| Image PNG | PNG image data | image/png |
+| Image JPEG | JPEG image data | image/jpeg |
+| PDF | PDF document | application/pdf |
+| SQLite DB | SQLite 3.x database | application/x-sqlite3 |
+| Symlink ke CSV | symbolic link to ../raw/file.csv | text/csv |
+
+[MIME STANDARD Engineering Task Force (IETF)](https://developer.mozilla.org/ms/docs/Web/HTTP/Basics_of_HTTP/MIME_Types)
+
 **Use case data engineering:** Validasi tipe file sebelum processing, detect corrupt files, verify file format dalam pipeline.
 
 ---
@@ -518,6 +542,63 @@ stat [options] file
 | `-f` | Filesystem | Show filesystem status | Monitor disk space |
 | `-L` | Follow | Follow symlinks | Stat target file, bukan symlink |
 | `-t` | Terse | Terse output (machine-readable) | Parsing dalam script |
+
+#### Tabel LENGKAP format `stat -c` (GNU coreutils)
+
+##### 📄 Identitas File
+| Format | Arti |
+|------|------|
+| `%n` | Nama file |
+| `%N` | Nama file + target symlink |
+| `%i` | Inode number |
+| `%F` | Tipe file |
+| `%h` | Jumlah hard link |
+
+##### 📦 Ukuran & Storage
+| Format | Arti |
+|------|------|
+| `%s` | Ukuran file (byte) |
+| `%b` | Jumlah blok terpakai |
+| `%B` | Ukuran blok (byte) |
+| `%o` | Optimal I/O block |
+| `%D` | Device number (hex) |
+| `%d` | Device number (decimal) |
+
+##### 🔐 Permission & Ownership
+| Format | Arti |
+|------|------|
+| `%a` | Permission octal (644) |
+| `%A` | Permission readable |
+| `%u` | UID |
+| `%U` | Username |
+| `%g` | GID |
+| `%G` | Group name |
+
+##### ⏱️ Timestamp
+| Format | Arti |
+|------|------|
+| `%x` | Access time (human) |
+| `%X` | Access time (epoch) |
+| `%y` | Modified time (human) |
+| `%Y` | Modified time (epoch) |
+| `%z` | Change time (human) |
+| `%Z` | Change time (epoch) |
+| `%w` | Birth time (human) |
+| `%W` | Birth time (epoch / -1) |
+
+##### 🔗 Symlink & Special
+| Format | Arti |
+|------|------|
+| `%C` | SELinux context |
+| `%t` | Major device (hex) |
+| `%T` | Minor device (hex) |
+
+##### 🧠 Literal & Kontrol Output
+| Format | Arti |
+|------|------|
+| `%%` | Karakter `%` |
+| `\n` | New line |
+| `\t` | Tab |
 
 **Use case data engineering:** Validasi ukuran file hasil ETL, audit timestamp, cek permission, monitoring metadata.
 
@@ -563,6 +644,8 @@ df [options] [filesystem/direktori]
 | `--total` | Total | Tampilkan grand total | Overview total disk |
 
 **Use case data engineering:** Pre-check disk space sebelum ETL, monitoring disk usage, alerting disk penuh, capacity planning.
+
+[LOG LATIHAN MANAJEMEN META DATA DAN UKURAN](log/01-file-system/1-5_metadata-dan-ukuran/latihan-dasar.md)
 
 ---
 
@@ -1913,19 +1996,13 @@ wget [options] URL
 | `r` | Read | 4 | Read file | List directory |
 | `w` | Write | 2 | Write file | Create/delete files |
 | `x` | Execute | 1 | Execute file | Access directory |
-| `-` | No permission | 0 | -
-| -
-|
+| `-` | No permission | 0 | - | - |
 
 **Common permission:**
--
-`644` (rw-r--r--): File biasa (owner write, others read)
--
-`755` (rwxr-xr-x): Executable/directory (owner write+execute, others read+execute)
--
-`600` (rw-------): Private file (hanya owner)
--
-`700` (rwx------): Private directory (hanya owner)
+- `644` (rw-r--r--): File biasa (owner write, others read)
+- `755` (rwxr-xr-x): Executable/directory (owner write+execute, others read+execute)
+- `600` (rw-------): Private file (hanya owner)
+- `700` (rwx------): Private directory (hanya owner)
 
 ---
 
@@ -2019,9 +2096,7 @@ umask 022       # Set umask
 
 **Behavior:**
 
-| umask | File (666 -
-mask) | Directory (777 -
-mask) | Use Case |
+| umask | File (666 - mask) | Directory (777 - mask) | Use Case |
 |-------|-------------------|------------------------|----------|
 | `022` | `644` (rw-r--r--) | `755` (rwxr-xr-x) | Default: readable by all |
 | `027` | `640` (rw-r-----) | `750` (rwxr-x---) | Group readable, others no access |
@@ -2300,9 +2375,7 @@ find /data -name "*.csv" -exec sha256sum {} \; > checksums.txt
 |-------|-----------|------------|-------|
 | **Shell variable** | Hanya di shell saat ini | `VAR=value` | `$VAR` |
 | **Environment variable** | Di shell dan child processes | `export VAR=value` | `$VAR`, `printenv` |
-| **Inheritance** | Child process inherit parent env | -
-| -
-|
+| **Inheritance** | Child process inherit parent env | - | - |
 
 **Common environment variables:**
 
@@ -2653,14 +2726,10 @@ export TZ="Asia/Jakarta"
 ```
 
 **Best practice:**
--
-Gunakan `${VAR:-default}` untuk fallback
--
-Validate required variables
--
-Separate secret dari code (use `.env` file, gitignore)
--
-Document expected variables
+- Gunakan `${VAR:-default}` untuk fallback
+- Validate required variables
+- Separate secret dari code (use `.env` file, gitignore)
+- Document expected variables
 
 ---
 
@@ -2753,16 +2822,11 @@ htop -u username
 ```
 
 **Features:**
--
-Color-coded output
--
-Mouse support
--
-Scrollable list
--
-Tree view
--
-Easier to use than `top`
+- Color-coded output
+- Mouse support
+- Scrollable list
+- Tree view
+- Easier to use than `top`
 
 **Interactive keys:**
 
@@ -3079,12 +3143,9 @@ vmstat 5 10           # 10 updates, every 5 seconds
 **Use case data engineering:** Diagnose performance issues, identify bottleneck (CPU vs I/O vs memory).
 
 **Interpretation:**
--
-High `r`, low `wa` → CPU bottleneck
--
-High `b`, high `wa` → I/O bottleneck
--
-High `si`/`so` → Memory pressure (swapping)
+- High `r`, low `wa` → CPU bottleneck
+- High `b`, high `wa` → I/O bottleneck
+- High `si`/`so` → Memory pressure (swapping)
 
 ---
 
@@ -3149,12 +3210,9 @@ uptime
 | 4 CPUs, load 8.0 | > CPU count | Overloaded, queue building |
 
 **Trend matters:**
--
-`0.5, 1.0, 2.0` → Load increasing (investigate)
--
-`2.0, 1.5, 1.0` → Load decreasing (recovering)
--
-`2.0, 2.0, 2.0` → Stable high load
+- `0.5, 1.0, 2.0` → Load increasing (investigate)
+- `2.0, 1.5, 1.0` → Load decreasing (recovering)
+- `2.0, 2.0, 2.0` → Stable high load
 
 **Use case data engineering:** Quick health check, assess system load, capacity planning.
 
@@ -3322,22 +3380,15 @@ fi
 ```
 
 **Symptoms:**
--
-File count increasing di staging
--
-Disk usage growing
--
-Processing lag increasing
+- File count increasing di staging
+- Disk usage growing
+- Processing lag increasing
 
 **Solutions:**
--
-Slow down producer
--
-Speed up consumer (parallelize)
--
-Add capacity
--
-Implement flow control
+- Slow down producer
+- Speed up consumer (parallelize)
+- Add capacity
+- Implement flow control
 
 ---
 
