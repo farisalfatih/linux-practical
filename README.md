@@ -674,6 +674,8 @@ ls data[!0-9].txt      # data + bukan angka
 
 **Use case data engineering:** Batch process files by pattern, selective file operations, file discovery dalam pipeline.
 
+### [LOG LATIHAN WILDCARD DAN PATTERN MATCHING](log/01-file-system/1-6_wildcards-dan-pattern-maching/latihan-dasar.md)
+
 ---
 
 **Yang harus dikuasai:**
