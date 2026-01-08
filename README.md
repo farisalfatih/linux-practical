@@ -521,7 +521,7 @@ file [options] file
 | SQLite DB | SQLite 3.x database | application/x-sqlite3 |
 | Symlink ke CSV | symbolic link to ../raw/file.csv | text/csv |
 
-[MIME STANDARD Engineering Task Force (IETF)](https://developer.mozilla.org/ms/docs/Web/HTTP/Basics_of_HTTP/MIME_Types)
+### [MIME STANDARD Engineering Task Force (IETF)](https://developer.mozilla.org/ms/docs/Web/HTTP/Basics_of_HTTP/MIME_Types)
 
 **Use case data engineering:** Validasi tipe file sebelum processing, detect corrupt files, verify file format dalam pipeline.
 
@@ -645,7 +645,7 @@ df [options] [filesystem/direktori]
 
 **Use case data engineering:** Pre-check disk space sebelum ETL, monitoring disk usage, alerting disk penuh, capacity planning.
 
-[LOG LATIHAN MANAJEMEN META DATA DAN UKURAN](log/01-file-system/1-5_metadata-dan-ukuran/latihan-dasar.md)
+### [LOG LATIHAN MANAJEMEN META DATA DAN UKURAN](log/01-file-system/1-5_metadata-dan-ukuran/latihan-dasar.md)
 
 ---
 
@@ -696,23 +696,40 @@ ls data[!0-9].txt      # data + bukan angka
 
 **How to use:**
 ```bash
-find [path] [options] [expression]
+find [option] [starting-point...] [expression] [action]
 ```
 
-**Options:**
+**Options (diletakkan sebelum starting-point):**
 
-| Option | Kepanjangan | Fungsi | Digunakan oleh Data Engineer untuk |
-|--------|-------------|--------|-------------------------------------|
-| `-name pattern` | Name | Cari berdasarkan nama file | Find file by pattern (*.csv, *.json) |
-| `-type f/d` | Type | Filter berdasarkan tipe (f=file, d=directory) | Cari hanya file atau hanya direktori |
-| `-size [+-]N` | Size | Cari berdasarkan ukuran | Identifikasi file besar/kecil untuk processing |
-| `-mtime [+-]N` | Modification time | File dimodifikasi N hari lalu | Find file by date untuk ingestion |
-| `-newer file` | Newer | File lebih baru dari reference | Incremental processing |
-| `-empty` | Empty | File/direktori kosong | Cleanup atau validasi |
-| `-delete` | Delete | Hapus file yang match | Cleanup otomatis |
-| `-exec cmd {} \;` | Execute | Jalankan command untuk setiap match | Batch processing |
+| Option | Fungsi | Contoh Penggunaan |
+|--------|--------|-------------------|
+| `-H` | Follow symbolic links di command line | `find -H /data -name "*.csv"` |
+| `-L` | Follow all symbolic links | `find -L /data -type f` |
+| `-P` | Never follow symbolic links (default) | `find -P . -name "*.log"` |
+| `-D debugopts` | Debug find command execution (jarang dipakai) | `find -D search . -name "*.csv"` |
+| `-Olevel` | Optimize query level 0-3 (jarang dipakai) | `find -O3 . -name "*.log"` |
+
+**Expression (kriteria pencarian):**
+
+| Expression | Fungsi | Contoh Penggunaan |
+|------------|--------|-------------------|
+| `-name pattern` | Cari berdasarkan nama file | `find . -name "*.csv"` - cari semua file CSV |
+| `-type f/d` | Filter berdasarkan tipe (f=file, d=directory) | `find . -type f` - cari hanya file |
+| `-size [+-]N` | Cari berdasarkan ukuran | `find . -size +100M` - file lebih dari 100MB |
+| `-mtime [+-]N` | File dimodifikasi N hari lalu | `find . -mtime -7` - file diubah 7 hari terakhir |
+| `-newer file` | File lebih baru dari reference | `find . -newer last_run.txt` - incremental load |
+| `-empty` | File/direktori kosong | `find . -empty` - cari file kosong untuk cleanup |
+
+**Action (aksi terhadap hasil):**
+
+| Action | Fungsi | Contoh Penggunaan |
+|--------|--------|-------------------|
+| `-delete` | Hapus file yang match | `find . -name "*.tmp" -delete` |
+| `-exec cmd {} \;` | Jalankan command untuk setiap match | `find . -name "*.csv" -exec wc -l {} \;` |
 
 **Use case data engineering:** Discover data files, filter by date/size, batch processing, cleanup old data.
+
+### [LOG LATIHAN PENCARIAN FILE](log/02-pencarian-dan-filtering/2-1_pencarian-file/latihan-dasar.md)
 
 ---
 
