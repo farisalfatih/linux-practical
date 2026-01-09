@@ -781,7 +781,7 @@ grep [options] pattern [file...]
 
 **Use case data engineering:** Filter log, search error, extract pattern dari data, validasi isi file.
 
-### [LOG LATIHAN DASAR PENCARIAN POLa text](log/02-pencarian-dan-filtering/2-2_pencarian-pola-text/latihan-dasar.md)
+### [LOG LATIHAN DASAR PENCARIAN POLOLA DAN TEXT](log/02-pencarian-dan-filtering/2-2_pencarian-pola-text/latihan-dasar.md)
 
 ---
 
