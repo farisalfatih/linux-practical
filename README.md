@@ -876,6 +876,8 @@ uniq [options] [input [output]]
 
 **Note:** `uniq` hanya deteksi duplikat yang **berurutan**. Gunakan `sort` dulu sebelum `uniq`.
 
+### [LOG LATIHAN DASAR SORTING DAN DEDUPLIKASI](log/02-pencarian-dan-filtering/2-4_sorting-dan-deduplikasi/latihan-dasar.md)
+
 ---
 
 ## 2.5 Ekstraksi kolom
