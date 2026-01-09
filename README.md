@@ -729,8 +729,6 @@ find [option] [starting-point...] [expression] [action]
 
 **Use case data engineering:** Discover data files, filter by date/size, batch processing, cleanup old data.
 
-### [LOG LATIHAN PENCARIAN FILE](log/02-pencarian-dan-filtering/2-1_pencarian-file/latihan-dasar.md)
-
 ---
 
 ### locate (cari file dari database)
@@ -752,6 +750,8 @@ locate [options] pattern
 **Use case data engineering:** Fast file discovery, verify file existence, locate config files.
 
 **Note:** `locate` lebih cepat dari `find` tapi menggunakan database yang di-update secara periodik.
+
+### [LOG LATIHAN PENCARIAN FILE](log/02-pencarian-dan-filtering/2-1_pencarian-file/latihan-dasar.md)
 
 ---
 
@@ -780,6 +780,8 @@ grep [options] pattern [file...]
 | `-o` | Only matching | Hanya tampilkan bagian yang match | Extract specific data |
 
 **Use case data engineering:** Filter log, search error, extract pattern dari data, validasi isi file.
+
+### [LOG LATIHAN DASAR PENCARIAN POLa text](log/02-pencarian-dan-filtering/2-2_pencarian-pola-text/latihan-dasar.md)
 
 ---
 
