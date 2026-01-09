@@ -826,6 +826,8 @@ nl [options] [file...]
 
 **Use case data engineering:** Add line numbers untuk referencing, debugging data dengan line reference.
 
+### [LOG LATIHAN DASAR STATISTIK DAN AGREGASI](log/02-pencarian-dan-filtering/2-3_statistik-dan-aregasi/latihan-dasar.md)
+
 ---
 
 ## 2.4 Sorting & deduplikasi
