@@ -902,6 +902,8 @@ cut [options] [file...]
 
 **Use case data engineering:** Extract kolom dari CSV/TSV, select fields untuk processing, reformat data.
 
+### [LOG LATIHAN DASAR EKSTRAKSI KOLOM](log/02-pencarian-dan-filtering/2-5_ekstraksi-kolom/latihan-dasar.md)
+
 ---
 
 ## 2.6 Perbandingan file
