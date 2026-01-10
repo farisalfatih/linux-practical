@@ -952,6 +952,8 @@ comm [options] file1 file2
 
 **Note:** `comm` memerlukan file input yang sudah **sorted**. Output 3 kolom: (1) hanya di file1, (2) hanya di file2, (3) di keduanya.
 
+### [LOG LATIHAN DASAR PERBANDINGAN FILE](log/02-pencarian-dan-filtering/2-6_perbandingan-file/latihan-dasar.md)
+
 ---
 
 **Yang harus dikuasai:**
