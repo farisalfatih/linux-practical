@@ -4,3 +4,4 @@ glow - snap: generate markdown di terminal, untuk leperluan log belajar
 git - apt: untuk version controll
 network-manager - apt: untuk terhubung dengan internet
 neovim - apt: text editor
+man-db - apt: untuk membaca dokumentasi penggunaan comend linux
