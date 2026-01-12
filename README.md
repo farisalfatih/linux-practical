@@ -174,8 +174,6 @@ cd [DIRECTORY]
 
 **Best practice:** Gunakan absolute path dalam production pipeline untuk konsistensi.
 
-
-### [LOG LATIHAN PATH DAN LOKASI](log/01-file-system/1-1_path-dan-lokasi/latihan.md)
 ---
 
 ## 1.2 Eksplorasi filesystem
@@ -224,9 +222,6 @@ tree [OPTION]... [DIRECTORY]...
 
 **Use case data engineering:** Dokumentasi struktur data lake, onboarding tim baru, validasi struktur setelah deployment.
 
-### [LATIHAN DASAR ESKPLORASI](/log/01-file-system/1-2_eksplorasi-filesystem/latihan-dasar.md)
-### [TASK LATIHAN LS DAN TREE](/log/01-file-system/1-2_eksplorasi-filesystem/task-ls-tree.md)
-### [KERJAKAN TASK LATIHAN LS DAN TREE](/log/01-file-system/1-2_eksplorasi-filesystem/action-ls-tree.md)
 ---
 
 ## 1.3 Membaca isi file
@@ -347,8 +342,6 @@ more [options] file ...
 **Use case data engineering:** Quick browse file (alternatif less), pipe long output untuk pagination.
 
 **Note:** `less` lebih powerful, gunakan `more` hanya jika `less` tidak tersedia.
-
-### [LOG LATIHAN MEMBACA ISI FILE](log/01-file-system/1-3_membaca-isi-file/latihan-dasar.md)
 
 ---
 
@@ -477,8 +470,6 @@ ln [options] source link
 
 **Use case data engineering:** Alias "latest" data untuk consumer, zero-downtime deployment, shared config/reference data.
 
-### [LOG LATIHAN MANAJEMEN FILE DAN DIRECTORY](log/01-file-system/1-4_manajemen-file-dan-directory/latihan-dasar.md)
-
 ---
 
 ## 1.5 Metadata & ukuran
@@ -521,8 +512,6 @@ file [options] file
 | SQLite DB | SQLite 3.x database | application/x-sqlite3 |
 | Symlink ke CSV | symbolic link to ../raw/file.csv | text/csv |
 
-### [MIME STANDARD Engineering Task Force (IETF)](https://developer.mozilla.org/ms/docs/Web/HTTP/Basics_of_HTTP/MIME_Types)
-
 **Use case data engineering:** Validasi tipe file sebelum processing, detect corrupt files, verify file format dalam pipeline.
 
 ---
@@ -542,63 +531,6 @@ stat [options] file
 | `-f` | Filesystem | Show filesystem status | Monitor disk space |
 | `-L` | Follow | Follow symlinks | Stat target file, bukan symlink |
 | `-t` | Terse | Terse output (machine-readable) | Parsing dalam script |
-
-#### Tabel LENGKAP format `stat -c` (GNU coreutils)
-
-##### 📄 Identitas File
-| Format | Arti |
-|------|------|
-| `%n` | Nama file |
-| `%N` | Nama file + target symlink |
-| `%i` | Inode number |
-| `%F` | Tipe file |
-| `%h` | Jumlah hard link |
-
-##### 📦 Ukuran & Storage
-| Format | Arti |
-|------|------|
-| `%s` | Ukuran file (byte) |
-| `%b` | Jumlah blok terpakai |
-| `%B` | Ukuran blok (byte) |
-| `%o` | Optimal I/O block |
-| `%D` | Device number (hex) |
-| `%d` | Device number (decimal) |
-
-##### 🔐 Permission & Ownership
-| Format | Arti |
-|------|------|
-| `%a` | Permission octal (644) |
-| `%A` | Permission readable |
-| `%u` | UID |
-| `%U` | Username |
-| `%g` | GID |
-| `%G` | Group name |
-
-##### ⏱️ Timestamp
-| Format | Arti |
-|------|------|
-| `%x` | Access time (human) |
-| `%X` | Access time (epoch) |
-| `%y` | Modified time (human) |
-| `%Y` | Modified time (epoch) |
-| `%z` | Change time (human) |
-| `%Z` | Change time (epoch) |
-| `%w` | Birth time (human) |
-| `%W` | Birth time (epoch / -1) |
-
-##### 🔗 Symlink & Special
-| Format | Arti |
-|------|------|
-| `%C` | SELinux context |
-| `%t` | Major device (hex) |
-| `%T` | Minor device (hex) |
-
-##### 🧠 Literal & Kontrol Output
-| Format | Arti |
-|------|------|
-| `%%` | Karakter `%` |
-| `\n` | New line |
-| `\t` | Tab |
 
 **Use case data engineering:** Validasi ukuran file hasil ETL, audit timestamp, cek permission, monitoring metadata.
 
@@ -645,8 +577,6 @@ df [options] [filesystem/direktori]
 
 **Use case data engineering:** Pre-check disk space sebelum ETL, monitoring disk usage, alerting disk penuh, capacity planning.
 
-### [LOG LATIHAN MANAJEMEN META DATA DAN UKURAN](log/01-file-system/1-5_metadata-dan-ukuran/latihan-dasar.md)
-
 ---
 
 ## 1.6 Wildcards & Pattern Matching
@@ -673,8 +603,6 @@ ls data[!0-9].txt      # data + bukan angka
 | `[!abc]` | Negation | BUKAN a,b,c | `data[!0-9].txt` | `dataX.txt` | `data1.txt` |
 
 **Use case data engineering:** Batch process files by pattern, selective file operations, file discovery dalam pipeline.
-
-### [LOG LATIHAN WILDCARD DAN PATTERN MATCHING](log/01-file-system/1-6_wildcards-dan-pattern-maching/latihan-dasar.md)
 
 ---
 
@@ -751,8 +679,6 @@ locate [options] pattern
 
 **Note:** `locate` lebih cepat dari `find` tapi menggunakan database yang di-update secara periodik.
 
-### [LOG LATIHAN PENCARIAN FILE](log/02-pencarian-dan-filtering/2-1_pencarian-file/latihan-dasar.md)
-
 ---
 
 ## 2.2 Pencarian pola teks
@@ -780,8 +706,6 @@ grep [options] pattern [file...]
 | `-o` | Only matching | Hanya tampilkan bagian yang match | Extract specific data |
 
 **Use case data engineering:** Filter log, search error, extract pattern dari data, validasi isi file.
-
-### [LOG LATIHAN DASAR PENCARIAN POLOLA DAN TEXT](log/02-pencarian-dan-filtering/2-2_pencarian-pola-text/latihan-dasar.md)
 
 ---
 
@@ -825,8 +749,6 @@ nl [options] [file...]
 | `-w N` | Width | Lebar field untuk nomor baris | Format alignment |
 
 **Use case data engineering:** Add line numbers untuk referencing, debugging data dengan line reference.
-
-### [LOG LATIHAN DASAR STATISTIK DAN AGREGASI](log/02-pencarian-dan-filtering/2-3_statistik-dan-aregasi/latihan-dasar.md)
 
 ---
 
@@ -876,8 +798,6 @@ uniq [options] [input [output]]
 
 **Note:** `uniq` hanya deteksi duplikat yang **berurutan**. Gunakan `sort` dulu sebelum `uniq`.
 
-### [LOG LATIHAN DASAR SORTING DAN DEDUPLIKASI](log/02-pencarian-dan-filtering/2-4_sorting-dan-deduplikasi/latihan-dasar.md)
-
 ---
 
 ## 2.5 Ekstraksi kolom
@@ -901,8 +821,6 @@ cut [options] [file...]
 | `--output-delimiter=STR` | Output delimiter | Custom output delimiter | Change delimiter in output |
 
 **Use case data engineering:** Extract kolom dari CSV/TSV, select fields untuk processing, reformat data.
-
-### [LOG LATIHAN DASAR EKSTRAKSI KOLOM](log/02-pencarian-dan-filtering/2-5_ekstraksi-kolom/latihan-dasar.md)
 
 ---
 
@@ -951,8 +869,6 @@ comm [options] file1 file2
 **Use case data engineering:** Compare sorted lists, find new/deleted records, set operations (intersection, difference).
 
 **Note:** `comm` memerlukan file input yang sudah **sorted**. Output 3 kolom: (1) hanya di file1, (2) hanya di file2, (3) di keduanya.
-
-### [LOG LATIHAN DASAR PERBANDINGAN FILE](log/02-pencarian-dan-filtering/2-6_perbandingan-file/latihan-dasar.md)
 
 ---
 

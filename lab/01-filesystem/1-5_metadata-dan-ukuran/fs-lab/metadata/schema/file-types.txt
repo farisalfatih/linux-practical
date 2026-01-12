@@ -1,3 +1,0 @@
-/home/faris-al-fatih/linux-practical/lab/01-filesystem/1-5_metadata-dan-ukuran/fs-lab/data/raw/crypto.csv: CSV ASCII text
-/home/faris-al-fatih/linux-practical/lab/01-filesystem/1-5_metadata-dan-ukuran/fs-lab/data/raw/empty.txt:  empty
-/home/faris-al-fatih/linux-practical/lab/01-filesystem/1-5_metadata-dan-ukuran/fs-lab/data/raw/random.bin: data
