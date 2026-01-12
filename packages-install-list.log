@@ -1,0 +1,15 @@
+Mon Jan 12 15:26:53 WIB 2026
+packages;apt ntfs-3g: untuk bisa membaca partisi ntfs, untuk keperluan transfer file windows ubuntu
+packages;snap glow: generate markdown di terminal, untuk leperluan log belajar
+packages;apt git: untuk version controll
+packages;apt network-manager: untuk terhubung dengan internet
+packages;apt neovim: text editor
+packages;apt man-db: untuk membaca dokumentasi penggunaan comend linux
+
+Mon Jan 12 16:35:42 WIB 2026
+KARENA MAN PAGES TIDAK BISA DIGUNAKAN DALAM UBUNTU SERVER MINIMALIS SAYA MELAKUKAN UNMINIMIZE YANG MANA PACKAGE YANG DI INSTALL DI SERVER BERTAMBAHI
+packages;apt ubuntu-standard: migrasi dari ubuntu minimal ke ubuntu standard
+
+Mon Jan 12 17:06:52 WIB 2026
+packages;apt; tree : digunakan untuk visualisasi tree struktur directory
+
