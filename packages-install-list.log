@@ -13,3 +13,7 @@ packages;apt ubuntu-standard: migrasi dari ubuntu minimal ke ubuntu standard
 Mon Jan 12 17:06:52 WIB 2026
 packages;apt; tree : digunakan untuk visualisasi tree struktur directory
 
+Tue Jan 13 13:23:09 WIB 2026
+packages;apt python3-pip: pip intuk install packages dari python
+packages;apt python3-venv: untuk menggunakan virtual env
+packages;pip;venv;/opt/venv/localfiletransfer localfiletransfer: untuk transfile lokal jaringan
