@@ -16,4 +16,8 @@ packages;apt; tree : digunakan untuk visualisasi tree struktur directory
 Tue Jan 13 13:23:09 WIB 2026
 packages;apt python3-pip: pip intuk install packages dari python
 packages;apt python3-venv: untuk menggunakan virtual env
+packages;apt; locate: pencarian cepat dengan database, harus update database dulu
+
+Wed Jan 14 21:52:47 WIB 2026
+packages;apt tmux: untuk terminal yang fleksibel
 
