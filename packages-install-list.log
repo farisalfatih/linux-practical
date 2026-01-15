@@ -1,6 +1,5 @@
 Mon Jan 12 15:26:53 WIB 2026
 packages;apt; ntfs-3g: untuk bisa membaca partisi ntfs, untuk keperluan transfer file windows ubuntu
-packages;snap glow: generate markdown di terminal, untuk leperluan log belajar
 packages;apt; git: untuk version controll
 packages;apt; network-manager: untuk terhubung dengan internet
 packages;apt; neovim: text editor
@@ -25,3 +24,4 @@ Thu Jan 15 02:03:43 WIB 2026
 .nvm curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
 packages;nvm; npm dan nodejs v22: untuk keperluan install gemini cli 
 packages;npm; gemini-cli: untuk keperluan tanya menanya
+packages;apt; xvfb: virtual display untuk keperluan browser
