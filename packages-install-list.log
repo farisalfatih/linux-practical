@@ -1,1 +1,16 @@
-network-manager xorg xinit i3-wm alacritty xserver-xorg-input-libinput xclip pulseaudio obs-studio neovim firefox
+Sun Jan 18 03:04:45 PM WIB 2026
+
+packages;apt;network-manager;mengelola koneksi jaringan (wifi, ethernet) di linux
+packages;apt;xorg;server tampilan grafis utama untuk sistem linux (x11)
+packages;apt;xinit;utilitas untuk memulai sesi x window system secara manual
+packages;apt;i3-wm;window manager tiling yang ringan dan efisien untuk x11
+packages;apt;alacritty;terminal emulator modern berbasis gpu, cepat dan ringan
+packages;apt;xserver-xorg-input-libinput;driver input untuk perangkat seperti touchpad, mouse, dan keyboard di xorg
+packages;apt;xclip;utilitas command line untuk akses clipboard x11
+packages;apt;pulseaudio;server suara untuk mengelola audio di linux
+packages;apt;obs-studio;aplikasi open source untuk perekaman layar dan live streaming
+packages;apt;neovim;editor teks modern, turunan dari vim, untuk coding dan editing
+packages;apt;firefox;browser web open source dari mozilla
+packages;apt;tree;menampilkan struktur direktori dan file dalam bentuk pohon di terminal
+
+
