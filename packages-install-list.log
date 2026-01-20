@@ -8,3 +8,4 @@ packages;apt;obs-studio;aplikasi open source untuk perekaman layar dan live stre
 packages;apt;neovim;editor teks modern, turunan dari vim, untuk coding dan editing
 packages;apt;google-chrome-stable;browser web open source dari google
 packages;apt;brightnessctl;dpkg untuk mengatur kecerahan layar
+local;sudo dpkg -i glow_2.1.1_amd64.deb || sudo apt-get -f install -y; install ai copilot 
