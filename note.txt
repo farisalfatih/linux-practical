@@ -1,0 +1,9 @@
+nvim / vi navigation
+- w : ke awal kata berikutnya
+- b : ke awal kata sebelumnya
+- e : ke akhir kata berikutnya
+- ge : ke akhir kata sebelumnya
+- 0 (nol) : ke awal baris
+- ^ : ke karakter non-spasi pertama di baris
+- $ : ke akhir baris
+

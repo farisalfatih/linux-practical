@@ -14,4 +14,4 @@ packages;apt;locate;utilitas untuk mencari file secara cepat dengan database
 packages;apt;tailscale;VPN mesh modern berbasis WireGuard
 packages;apt;openssh-server;server SSH untuk remote shell
 packages;apt;cloudflare-warp;VPN/proxy modern dari Cloudflare
-
+packages;apt;apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin; lingkungan isolasi
